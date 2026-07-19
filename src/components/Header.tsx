@@ -38,6 +38,7 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled ? "glass shadow-lg shadow-primary/5" : "bg-transparent"
       }`}
+      style={{ zIndex: 9999 }}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-end md:justify-center">
         <nav className="hidden md:flex items-center gap-8">
@@ -73,9 +74,10 @@ export default function Header() {
       />
 
       <div
-        className={`fixed top-0 right-0 h-full w-72 glass border-l border-white/10 transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed top-0 right-0 h-full w-72 border-l border-white/10 transition-transform duration-300 ease-out md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{ background: "rgba(10, 10, 26, 0.97)", backdropFilter: "blur(20px)" }}
       >
         <div className="flex items-center justify-end p-4">
           <button
@@ -95,8 +97,8 @@ export default function Header() {
               onClick={() => scrollTo(link.href.slice(1))}
               className={`text-left w-full px-4 py-3 rounded-lg text-sm font-orbitron tracking-wider uppercase transition-all duration-300 ${
                 active === link.href.slice(1)
-                  ? "text-primary bg-primary/10 border border-primary/20"
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
+                  ? "text-primary bg-primary/15 border border-primary/30"
+                  : "text-gray-300 hover:text-white hover:bg-white/10"
               }`}
               style={{ transitionDelay: `${i * 60}ms` }}
             >
