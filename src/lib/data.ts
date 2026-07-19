@@ -1,0 +1,73 @@
+export const personalInfo = {
+  name: "Vishnu A.S",
+  title: "Full Stack Developer",
+  tagline: "Building scalable web & mobile solutions with clean architecture",
+  bio: "Full Stack Developer with nearly 3 years of experience in designing and developing modern, scalable, and high-performance web and mobile applications. I enjoy building clean, maintainable, and user-centric solutions using JavaScript, TypeScript, React.js, React Native, Node.js, Express.js, PostgreSQL, and MongoDB. Passionate about continuous learning, I'm always exploring new technologies, software architecture, system design, cloud technologies, and AI-driven development to enhance my skills and build impactful applications.",
+  email: "vishnuasuresh2000@gmail.com",
+  location: "Kerala, India",
+  social: {
+    github: "https://github.com/vishnusureshas",
+    linkedin: "https://www.linkedin.com/in/vishnu-as-520311270",
+  },
+}
+
+export const skills = [
+  { name: "React", level: 95 },
+  { name: "JavaScript", level: 92 },
+  { name: "Node.js", level: 90 },
+  { name: "Express.js", level: 90 },
+  { name: "PostgreSQL", level: 88 },
+  { name: "Tailwind CSS", level: 88 },
+  { name: "React Native", level: 87 },
+  { name: "Redux", level: 85 },
+  { name: "TypeScript", level: 84 },
+  { name: "Next.js", level: 83 },
+  { name: "Git", level: 82 },
+  { name: "GitHub", level: 82 },
+  { name: "MongoDB", level: 80 },
+  { name: "Firebase", level: 78 },
+  { name: "Expo", level: 78 },
+  { name: "Socket.io", level: 76 },
+  { name: "Prisma", level: 75 },
+  { name: "Docker", level: 74 },
+  { name: "Context API", level: 74 },
+  { name: "MySQL", level: 73 },
+  { name: "HTML5", level: 72 },
+  { name: "CSS3", level: 72 },
+  { name: "Bootstrap", level: 72 },
+  { name: "Postman", level: 72 },
+  { name: "Swagger", level: 70 },
+  { name: "Jest", level: 70 },
+  { name: "Redis", level: 68 },
+  { name: "Figma", level: 68 },
+  { name: "Supabase", level: 66 },
+  { name: "AWS", level: 65 },
+  { name: "Vercel", level: 65 },
+  { name: "Netlify", level: 62 },
+  { name: "Nginx", level: 62 },
+  { name: "EJS", level: 60 },
+  { name: "SQLite", level: 60 },
+  { name: "C", level: 55 },
+]
+
+export const experiences = [
+  {
+    title: "Full Stack Developer",
+    company: "Bheemverse Innovation Pvt Ltd",
+    period: "2025 - 2026",
+    description: "Worked as a Full Stack Developer at an AI product company, contributing to the development and maintenance of AI-powered web and mobile applications. Collaborated with cross-functional teams to deliver scalable, secure, and high-quality software solutions, participating in the complete software development lifecycle, including application development, API integration, performance optimization, testing, debugging, and production deployment while following Agile development practices.",
+  },
+  {
+    title: "Frontend Developer",
+    company: "Pinnet Infosultions Pvt Ltd",
+    period: "2023 - 2025",
+    description: "Worked as a Frontend Developer, responsible for building responsive, pixel-perfect user interfaces using React.js. Translated design mockups into reusable UI components, integrated RESTful APIs, managed application state with Redux Toolkit, and ensured cross-browser compatibility and mobile responsiveness. Collaborated closely with backend developers and designers to deliver seamless user experiences and participated in code reviews to maintain code quality.",
+  },
+  {
+    title: "MERN Stack Intern",
+    company: "Luminar Technolab",
+    period: "2022 - 2023",
+    description: "Completed an intensive MERN Stack internship program, gaining hands-on experience in building full-stack web applications using MongoDB, Express.js, React.js, and Node.js. Worked on real-world projects involving REST API development, database schema design, authentication implementation, and frontend-backend integration. Developed a strong foundation in modern web development practices, version control with Git, and deployment workflows.",
+  },
+]
+
