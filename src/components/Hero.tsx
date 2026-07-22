@@ -37,16 +37,16 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative"
+            className="relative flex-shrink-0"
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80">
+            <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-80 md:h-80">
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
               <div className="absolute inset-2 bg-background rounded-full overflow-hidden flex items-center justify-center">
-                <span className="text-6xl md:text-7xl font-bold gradient-text">
+                <span className="text-4xl sm:text-5xl md:text-7xl font-bold gradient-text">
                   {personalInfo.name.split(" ").map(n => n[0]).join("")}
                 </span>
               </div>
@@ -56,22 +56,22 @@ export default function Hero() {
               href={personalInfo.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute -top-4 -right-4 w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-lg"
+              className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-lg flex items-center justify-center shadow-lg"
               animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Github className="w-6 h-6 text-primary-foreground" />
+              <Github className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
             </motion.a>
 
             <motion.a
               href={personalInfo.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute -bottom-2 -left-4 w-10 h-10 bg-secondary rounded-full flex items-center justify-center shadow-lg"
+              className="absolute -bottom-1 -left-2 sm:-bottom-2 sm:-left-4 w-9 h-9 sm:w-10 sm:h-10 bg-secondary rounded-full flex items-center justify-center shadow-lg"
               animate={{ y: [0, 10, 0], rotate: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
-              <Linkedin className="w-5 h-5 text-secondary-foreground" />
+              <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-secondary-foreground" />
             </motion.a>
           </motion.div>
 
@@ -111,7 +111,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="text-muted-foreground max-w-2xl mb-8 text-sm leading-relaxed"
+              className="text-muted-foreground max-w-2xl mb-8 text-xs sm:text-sm leading-relaxed line-clamp-4 sm:line-clamp-none"
             >
               {personalInfo.bio}
             </motion.p>
@@ -120,18 +120,18 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-8"
             >
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card hover:bg-card/80 border border-border transition-colors"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-card hover:bg-card/80 border border-border transition-colors w-full sm:w-auto justify-center"
               >
-                <Mail className="w-4 h-4 text-primary" />
-                <span className="text-sm text-foreground">{personalInfo.email}</span>
+                <Mail className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-xs sm:text-sm text-foreground truncate max-w-[200px] sm:max-w-none">{personalInfo.email}</span>
               </a>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card border border-border">
-                <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-sm text-foreground">{personalInfo.location}</span>
+              <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-card border border-border w-full sm:w-auto justify-center">
+                <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-xs sm:text-sm text-foreground">{personalInfo.location}</span>
               </div>
             </motion.div>
 

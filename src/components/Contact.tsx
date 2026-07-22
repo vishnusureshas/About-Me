@@ -6,7 +6,7 @@ import { personalInfo } from "@/lib/data"
 
 export default function Contact() {
   return (
-    <section className="py-20 bg-muted/30" id="contact">
+    <section className="py-16 sm:py-20 bg-muted/30" id="contact">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,27 +36,27 @@ export default function Contact() {
             <h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
 
             <div className="space-y-6 mb-8">
-              <motion.a
+                <motion.a
                 href={`mailto:${personalInfo.email}`}
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border"
               >
-                <div className="p-3 rounded-lg bg-primary/10">
+                <div className="p-3 rounded-lg bg-primary/10 flex-shrink-0">
                   <Mail className="w-5 h-5 text-primary" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium text-foreground">{personalInfo.email}</p>
+                  <p className="font-medium text-foreground text-sm sm:text-base break-all">{personalInfo.email}</p>
                 </div>
               </motion.a>
 
               <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
-                <div className="p-3 rounded-lg bg-primary/10">
+                <div className="p-3 rounded-lg bg-primary/10 flex-shrink-0">
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium text-foreground">{personalInfo.location}</p>
+                  <p className="font-medium text-foreground text-sm sm:text-base">{personalInfo.location}</p>
                 </div>
               </div>
             </div>
@@ -87,29 +87,29 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="p-8 rounded-2xl bg-card border border-border"
+            className="p-6 sm:p-8 rounded-2xl bg-card border border-border"
           >
             <h3 className="text-xl font-bold text-foreground mb-6">Send a Message</h3>
             <form className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <input
                   placeholder="Your name"
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full px-4 py-3.5 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
                 />
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full px-4 py-3.5 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
                 />
               </div>
               <input
                 placeholder="Subject"
-                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                className="w-full px-4 py-3.5 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
               />
               <textarea
                 placeholder="Your message..."
                 rows={5}
-                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
+                className="w-full px-4 py-3.5 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none text-sm"
               />
               <motion.button
                 type="submit"

@@ -22,7 +22,7 @@ const itemVariants = {
 
 export default function Skills() {
   return (
-    <section className="py-20 bg-background" id="skills">
+    <section className="py-16 sm:py-20 bg-background" id="skills">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

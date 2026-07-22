@@ -66,8 +66,9 @@ export default function Navbar() {
             </div>
 
             <button
-              className="md:hidden p-2 text-foreground"
+              className="md:hidden p-3 text-foreground min-w-[44px] min-h-[44px] flex items-center justify-center"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

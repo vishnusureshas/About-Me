@@ -6,7 +6,7 @@ import { education } from "@/lib/data"
 
 export default function Education() {
   return (
-    <section className="py-20 bg-background" id="education">
+    <section className="py-16 sm:py-20 bg-background" id="education">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,13 +43,13 @@ export default function Education() {
 
                 <div className="md:ml-20 p-6 rounded-2xl bg-card border border-border hover:border-primary/50 transition-colors">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-primary/10">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
                         <GraduationCap className="w-5 h-5 text-primary" />
                       </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground">{edu.degree}</h3>
-                        <p className="text-sm text-muted-foreground">{edu.institution}</p>
+                      <div className="min-w-0">
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground break-words">{edu.degree}</h3>
+                        <p className="text-sm text-muted-foreground break-words">{edu.institution}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">

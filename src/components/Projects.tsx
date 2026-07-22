@@ -10,7 +10,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function Projects() {
   return (
-    <section className="py-20 bg-muted/30" id="projects">
+    <section className="py-16 sm:py-20 bg-muted/30" id="projects">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -72,14 +72,14 @@ export default function Projects() {
               </div>
             </motion.div>
 
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-primary/10">
+                <div className="p-3 rounded-xl bg-primary/10 flex-shrink-0">
                   <ShoppingCart className="w-6 h-6 text-primary" />
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground">{mainProject.title}</h3>
-                  <p className="text-sm text-muted-foreground">{mainProject.subtitle}</p>
+                <div className="min-w-0">
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground break-words">{mainProject.title}</h3>
+                  <p className="text-sm text-muted-foreground break-words">{mainProject.subtitle}</p>
                 </div>
               </div>
               <p className="text-muted-foreground mb-6">{mainProject.description}</p>
@@ -121,7 +121,7 @@ export default function Projects() {
           >
             Other Projects
           </motion.h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             {miniProjects.map((project, index) => {
               const Icon = iconMap[project.icon] || Globe
               return (

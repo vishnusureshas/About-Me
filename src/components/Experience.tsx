@@ -6,7 +6,7 @@ import { experiences } from "@/lib/data"
 
 export default function Experience() {
   return (
-    <section className="py-20 bg-muted/30" id="experience">
+    <section className="py-16 sm:py-20 bg-muted/30" id="experience">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,24 +40,24 @@ export default function Experience() {
             >
               <div className="absolute left-6 w-4 h-4 rounded-full bg-primary border-4 border-background hidden md:block" />
 
-              <div className="md:ml-20 p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all">
+              <div className="md:ml-20 p-6 sm:p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all">
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-primary/10">
+                    <div className="p-3 rounded-xl bg-primary/10 flex-shrink-0">
                       <Briefcase className="w-6 h-6 text-primary" />
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-foreground">{exp.role}</h3>
-                      <p className="text-primary font-medium">{exp.company}</p>
+                    <div className="min-w-0">
+                      <h3 className="text-xl sm:text-2xl font-bold text-foreground break-words">{exp.role}</h3>
+                      <p className="text-primary font-medium break-words">{exp.company}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground flex-shrink-0">
                     <Calendar className="w-4 h-4" />
                     <span>{exp.period}</span>
                   </div>
                 </div>
 
-                <p className="text-muted-foreground mb-6">{exp.description}</p>
+                <p className="text-muted-foreground mb-6 text-sm sm:text-base">{exp.description}</p>
 
                 <div className="mb-6">
                   <h4 className="text-lg font-semibold text-foreground mb-4">Key Responsibilities</h4>
@@ -76,17 +76,6 @@ export default function Experience() {
                       </motion.li>
                     ))}
                   </ul>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-full bg-muted text-muted-foreground text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
                 </div>
               </div>
             </motion.div>
