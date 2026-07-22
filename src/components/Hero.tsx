@@ -32,7 +32,7 @@ export default function Hero() {
       />
 
       <div className="container mx-auto px-6 py-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div className="flex flex-col items-center gap-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -45,10 +45,12 @@ export default function Hero() {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
-              <div className="absolute inset-2 bg-background rounded-full overflow-hidden flex items-center justify-center">
-                <span className="text-4xl sm:text-5xl md:text-7xl font-bold gradient-text">
-                  {personalInfo.name.split(" ").map(n => n[0]).join("")}
-                </span>
+              <div className="absolute inset-2 bg-background rounded-full overflow-hidden">
+                <img
+                  src="/profile.jpeg"
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
@@ -75,7 +77,7 @@ export default function Hero() {
             </motion.a>
           </motion.div>
 
-          <div className="text-center lg:text-left flex-1">
+          <div className="text-center flex-1">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -120,7 +122,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8"
             >
               <a
                 href={`mailto:${personalInfo.email}`}
@@ -139,7 +141,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex justify-center lg:justify-start gap-4"
+              className="flex justify-center gap-4"
             >
               <a
                 href={personalInfo.social.github}
