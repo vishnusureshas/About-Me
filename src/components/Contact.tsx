@@ -1,52 +1,127 @@
 "use client"
 
+import { motion } from "framer-motion"
+import { Mail, MapPin, Github, Linkedin, Code, Send } from "lucide-react"
 import { personalInfo } from "@/lib/data"
-
-const links = [
-  { label: "GitHub", href: personalInfo.social.github, icon: "GH" },
-  { label: "LinkedIn", href: personalInfo.social.linkedin, icon: "LI" },
-  { label: "Email", href: `mailto:${personalInfo.email}`, icon: "@" },
-]
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative py-24 px-6">
-      <div className="max-w-3xl mx-auto text-center">
-        <p className="text-primary font-orbitron text-sm tracking-[0.3em] uppercase mb-4">
-          Connect
-        </p>
-        <h2 className="text-3xl sm:text-4xl font-orbitron font-bold mb-6">
-          Let&apos;s Work <span className="gradient-text">Together</span>
-        </h2>
-        <p className="text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed">
-          Have a project in mind or just want to say hello? Feel free to reach out.
-        </p>
+    <section className="py-20 bg-muted/30" id="contact">
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            Get In Touch
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Let&apos;s Work Together
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Whether you have a question or just want to say hi, I&apos;ll get back to you!
+          </p>
+        </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass rounded-xl px-6 py-3 font-orbitron text-sm text-white tracking-wider uppercase transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(0,212,255,0.2)] hover:scale-105"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        <div className="glass rounded-2xl p-8 max-w-md mx-auto">
-          <p className="text-gray-400 text-sm mb-2">Email me at</p>
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="text-lg font-orbitron gradient-text hover:opacity-80 transition-opacity"
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            {personalInfo.email}
-          </a>
-          <div className="mt-4 pt-4 border-t border-white/10">
-            <p className="text-gray-500 text-xs">{personalInfo.location}</p>
-          </div>
+            <h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
+
+            <div className="space-y-6 mb-8">
+              <motion.a
+                href={`mailto:${personalInfo.email}`}
+                whileHover={{ x: 5 }}
+                className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border"
+              >
+                <div className="p-3 rounded-lg bg-primary/10">
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Email</p>
+                  <p className="font-medium text-foreground">{personalInfo.email}</p>
+                </div>
+              </motion.a>
+
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
+                <div className="p-3 rounded-lg bg-primary/10">
+                  <MapPin className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Location</p>
+                  <p className="font-medium text-foreground">{personalInfo.location}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              {[
+                { icon: Github, link: personalInfo.social.github },
+                { icon: Linkedin, link: personalInfo.social.linkedin },
+                { icon: Code, link: personalInfo.social.leetcode },
+              ].map(({ icon: Icon, link }, i) => (
+                <motion.a
+                  key={i}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 rounded-xl bg-card border border-border hover:bg-primary/5"
+                >
+                  <Icon className="w-5 h-5 text-foreground" />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="p-8 rounded-2xl bg-card border border-border"
+          >
+            <h3 className="text-xl font-bold text-foreground mb-6">Send a Message</h3>
+            <form className="space-y-6">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <input
+                  placeholder="Your name"
+                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                />
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                />
+              </div>
+              <input
+                placeholder="Subject"
+                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+              />
+              <textarea
+                placeholder="Your message..."
+                rows={5}
+                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
+              />
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+              >
+                <Send className="w-4 h-4" />
+                Send Message
+              </motion.button>
+            </form>
+          </motion.div>
         </div>
       </div>
     </section>

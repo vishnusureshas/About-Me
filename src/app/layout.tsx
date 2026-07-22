@@ -17,6 +17,11 @@ const orbitron = Orbitron({
 export const metadata: Metadata = {
   title: "Vishnu A.S | Full Stack Developer",
   description: "Full Stack Developer specializing in React.js, React Native, Node.js, Express.js, and PostgreSQL. Nearly 3 years of experience building ERP, LMS, and enterprise applications.",
+  openGraph: {
+    title: "Vishnu A.S | Full Stack Developer",
+    description: "Full Stack Developer specializing in React.js, React Native, Node.js, Express.js, and PostgreSQL.",
+    type: "website",
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

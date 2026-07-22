@@ -1,58 +1,87 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { skills } from "@/lib/data"
+import { motion } from "framer-motion"
+import { skillCategories } from "@/lib/data"
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+}
 
 export default function Skills() {
-  const [visible, setVisible] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.2 }
-    )
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section id="skills" ref={ref} className="relative py-24 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16 animate-slide-up">
-          <p className="text-primary font-orbitron text-sm tracking-[0.3em] uppercase mb-4">
-            Expertise
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-orbitron font-bold">
-            My <span className="gradient-text">Skills</span>
+    <section className="py-20 bg-background" id="skills">
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            Technical Skills
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Technologies I Work With
           </h2>
-          <div className="mt-4 mx-auto w-20 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" />
-        </div>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            From frontend to backend, databases to cloud - here&apos;s my tech stack
+          </p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {skills.map((skill, i) => (
-            <div
-              key={skill.name}
-              className="glass rounded-xl p-5 transition-all duration-500 hover:border-primary/30"
-              style={{
-                transitionDelay: `${i * 80}ms`,
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(30px)",
-              }}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {skillCategories.map((category, index) => (
+            <motion.div
+              key={category.title}
+              variants={itemVariants}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="group relative p-6 rounded-2xl bg-card border border-border overflow-hidden"
             >
-              <div className="flex justify-between items-center mb-3">
-                <span className="font-orbitron text-sm font-bold text-white">{skill.name}</span>
-                <span className="font-orbitron text-xs text-primary">{skill.level}%</span>
-              </div>
-              <div className="skill-bar">
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+              />
+
+              <div className="relative z-10">
                 <div
-                  className="skill-bar-fill"
-                  style={{ width: visible ? `${skill.level}%` : "0%" }}
-                />
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} mb-4`}
+                >
+                  <span className="text-white font-bold text-lg">{index + 1}</span>
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-4">{category.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <motion.span
+                      key={skill}
+                      whileHover={{ scale: 1.05 }}
+                      className="px-3 py-1.5 rounded-lg bg-muted text-muted-foreground text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

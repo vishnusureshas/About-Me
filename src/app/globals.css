@@ -2,11 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground: #e0e0e0;
-  --background-start: #0a0a1a;
-  --background-mid: #0f0f2e;
-  --background-end: #1a0a2e;
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 95%;
+    --card: 240 10% 5.9%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 10% 5.9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 187 100% 50%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 267 100% 62%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 10% 10%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 329 100% 72%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 62% 60%;
+    --destructive-foreground: 0 0% 95%;
+    --border: 240 10% 15%;
+    --input: 240 10% 15%;
+    --ring: 187 100% 50%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 * {
@@ -23,21 +49,11 @@ html {
 }
 
 body {
-  color: var(--foreground);
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
   font-family: var(--font-inter), sans-serif;
-  background: linear-gradient(135deg, var(--background-start), var(--background-mid), var(--background-end));
-  background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 100% 0%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 50%; }
 }
 
 .animated-grid {
@@ -60,7 +76,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #00d4ff, #7b2ff7, #ff6ec7);
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -78,7 +94,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, #00d4ff, #7b2ff7, #ff6ec7, #00d4ff);
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)), hsl(var(--primary)));
   background-size: 300% 300%;
   animation: gradient-shift 6s ease infinite;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -86,72 +102,26 @@ body {
   mask-composite: exclude;
 }
 
-.floating-particle {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.15), transparent);
-  animation: float-particle 20s infinite linear;
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes float-particle {
-  0% { transform: translateY(100vh) scale(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
-.skill-bar {
-  position: relative;
-  height: 8px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.06);
-  overflow: hidden;
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
-.skill-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #00d4ff, #7b2ff7);
-  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-.skill-bar-fill::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shimmer 2s infinite;
-}
 
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.timeline-line {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, #00d4ff, #7b2ff7, transparent);
-}
-
-.timeline-dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #00d4ff, #7b2ff7);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-}
-
-@media (max-width: 768px) {
-  .timeline-line {
-    left: 20px;
-  }
-}
