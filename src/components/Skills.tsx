@@ -61,7 +61,9 @@ export default function Skills() {
               />
 
               <div className="relative z-10">
-                <div className="inline-flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br from-green-500 to-emerald-500 mb-4">
+                <div
+                  className={`inline-flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br ${category.color} mb-4`}
+                >
                   <span className="text-white font-bold text-sm">{index + 1}</span>
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-4">{category.title}</h3>
