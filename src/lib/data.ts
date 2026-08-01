@@ -5,7 +5,7 @@ export const personalInfo = {
   bio: "Full Stack Developer with nearly 3 years of experience in designing and developing modern, scalable, and high-performance web and mobile applications. I enjoy building clean, maintainable, and user-centric solutions using JavaScript, TypeScript, React.js, React Native, Node.js, Express.js, PostgreSQL, and MongoDB. Passionate about continuous learning, I'm always exploring new technologies, software architecture, system design, cloud technologies, and AI-driven development to enhance my skills and build impactful applications.",
   email: "vishnuasuresh2000@gmail.com",
   phone: "+91 8123456789",
-  location: "Kerala, India",
+  location: "Calicut, Kerala, India",
   social: {
     github: "https://github.com/vishnusureshas",
     linkedin: "https://www.linkedin.com/in/vishnu-as-520311270",
@@ -39,7 +39,7 @@ export const skillCategories = [
   },
   {
     title: "Backend",
-    skills: ["Node.js", "Express.js", "Prisma", "Socket.io"],
+    skills: ["Node.js", "Express.js", "Prisma", "Socket.io", "REST APIs", "OOPs", "MVC", "Repository Architecture"],
     color: "from-green-500 to-emerald-500",
   },
   {
@@ -49,7 +49,7 @@ export const skillCategories = [
   },
   {
     title: "Cloud & DevOps",
-    skills: ["AWS", "Docker", "Nginx", "Vercel", "Netlify"],
+    skills: ["AWS", "EC2", "S3 Bucket", "Cloudinary", "Docker", "Nginx", "Vercel", "Netlify", "CI/CD Pipelines"],
     color: "from-red-500 to-rose-500",
   },
   {
