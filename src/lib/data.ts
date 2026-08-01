@@ -17,7 +17,7 @@ export const education = [
   {
     degree: "Bachelor of Computer Science",
     institution: "University of Calicut",
-    year: "2020 - 2023",
+    year: "2019 - 2022",
   },
 ]
 
