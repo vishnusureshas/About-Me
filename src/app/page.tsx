@@ -10,9 +10,10 @@ import ScrollToTop from "@/components/ScrollToTop"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen overflow-clip">
       <Navbar />
       <Hero />
+      <div className="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <Experience />
       <Skills />
       <Projects />

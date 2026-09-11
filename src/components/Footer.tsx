@@ -60,7 +60,7 @@ export default function Footer() {
 
         <div className="py-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
           <p className="text-muted-foreground text-center sm:text-left inline-flex items-center gap-1.5 flex-wrap justify-center">
-            © {year} Crafted with <Heart className="w-3 h-3 text-accent fill-accent" /> by {personalInfo.name} • Built with Next.js, Tailwind & Framer Motion
+            © {year} Crafted with <Heart className="w-3 h-3 text-accent fill-accent" /> by {personalInfo.name}
           </p>
           <div className="flex items-center gap-4 font-jetbrains tracking-wide text-muted-foreground">
             <span className="hidden sm:inline-flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> All systems operational</span>

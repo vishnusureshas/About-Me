@@ -57,7 +57,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-12 sm:mb-14"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[11px] font-jetbrains tracking-[0.16em] uppercase text-muted-foreground">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-[11px] font-jetbrains tracking-[0.16em] uppercase text-muted-foreground premium-ring">
             <MessageCircle className="w-3 h-3 text-primary" /> Get in touch
           </span>
           <h2 className="mt-4 font-space font-bold tracking-[-0.03em] text-3xl sm:text-4xl md:text-[42px] leading-none text-foreground">
@@ -74,7 +74,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="space-y-5"
           >
-            <div className="rounded-[28px] glass-strong overflow-hidden p-7 sm:p-8 relative">
+            <div className="rounded-[28px] glass-strong premium-ring overflow-hidden p-7 sm:p-8 relative">
               <div className="absolute -top-20 -right-20 w-56 h-56 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
               <h3 className="font-space font-semibold text-xl tracking-tight text-foreground">Contact information</h3>
               <p className="text-sm text-muted-foreground mt-2">Prefer email or a quick call — I&apos;m responsive and open to remote.</p>
@@ -137,7 +137,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="rounded-[28px] glass-strong p-6 sm:p-8 relative overflow-hidden"
+            className="rounded-[28px] glass-strong premium-ring p-6 sm:p-8 relative overflow-hidden"
           >
             <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-secondary/10 rounded-full blur-3xl pointer-events-none" />
             <div className="flex items-start justify-between gap-4 mb-6 relative">

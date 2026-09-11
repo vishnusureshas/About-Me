@@ -35,7 +35,7 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="max-w-6xl mx-auto"
         >
-          <div className="relative rounded-[28px] glass-strong overflow-hidden card-glow">
+          <div className="relative rounded-[28px] glass-strong premium-ring overflow-hidden card-glow">
             <div className="absolute -top-24 -right-24 w-[520px] h-[520px] bg-primary/10 rounded-full blur-[60px] pointer-events-none" />
             <div className="absolute -bottom-24 -left-24 w-[420px] h-[420px] bg-secondary/10 rounded-full blur-[60px] pointer-events-none" />
 

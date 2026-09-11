@@ -61,6 +61,10 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        premium: "0 0 0 1px rgba(255,255,255,0.06), 0 20px 60px rgba(0,0,0,0.45), 0 0 40px rgba(0,212,255,0.12)",
+        soft: "0 8px 32px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.06)",
+      },
       animation: {
         float: "float 6s ease-in-out infinite",
         "gradient-shift": "gradient-shift 15s ease infinite",

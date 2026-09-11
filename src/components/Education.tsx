@@ -16,7 +16,7 @@ export default function Education() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center mb-12 sm:mb-14"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[11px] font-jetbrains tracking-[0.16em] uppercase text-muted-foreground">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-[11px] font-jetbrains tracking-[0.16em] uppercase text-muted-foreground premium-ring">
             <Award className="w-3 h-3 text-primary" /> Education
           </span>
           <h2 className="mt-4 font-space font-bold tracking-[-0.03em] text-3xl sm:text-4xl md:text-[42px] leading-none text-foreground">
@@ -34,7 +34,7 @@ export default function Education() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.08 }}
-                className="group relative rounded-[24px] glass-strong p-6 sm:p-8 overflow-hidden card-glow flex flex-col sm:flex-row sm:items-center gap-6"
+                className="group relative rounded-[24px] glass-strong premium-ring p-6 sm:p-8 overflow-hidden card-glow flex flex-col sm:flex-row sm:items-center gap-6"
               >
                 <div className="absolute -top-16 -right-16 w-56 h-56 bg-secondary/10 rounded-full blur-3xl opacity-60 pointer-events-none" />
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary grid place-items-center flex-shrink-0 shadow-[0_10px_24px_rgba(0,212,255,0.25)]">
@@ -61,7 +61,7 @@ export default function Education() {
               className="rounded-[20px] border border-dashed border-white/10 p-5 text-center"
             >
               <p className="text-sm text-muted-foreground">
-                Continuous learning — <span className="text-foreground font-medium">System design • Cloud • AI engineering</span> • building in public
+                Continuous learning — <span className="text-foreground font-medium tracking-tight">System design • Cloud • AI engineering</span> • building in public
               </p>
             </motion.div>
           </div>
