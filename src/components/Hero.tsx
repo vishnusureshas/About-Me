@@ -5,12 +5,6 @@ import { Mail, MapPin, Github, Linkedin, Code2, ArrowRight, Sparkles, Copy, Chec
 import { personalInfo } from "@/lib/data"
 import { useState } from "react"
 
-const stats = [
-  { value: "3+", label: "Years Exp.", sub: "Prod. hardened" },
-  { value: "12+", label: "Projects", sub: "Shipped & scaled" },
-  { value: "4.9/5", label: "Feedback", sub: "Client delight" },
-]
-
 const techPills = [
   { label: "React • Next.js", icon: Layers, pos: "top-[8%] -left-4 sm:-left-8" },
   { label: "Node • Postgres", icon: Database, pos: "top-[48%] -right-6 sm:-right-10" },
@@ -202,7 +196,7 @@ export default function Hero() {
                         <div className="w-10 h-10 rounded-full bg-white text-zinc-900 grid place-items-center font-bold text-sm shadow">VS</div>
                         <div>
                           <p className="text-white text-sm font-semibold leading-none">{personalInfo.name} — {personalInfo.title}</p>
-                          <p className="text-white/60 text-xs font-jetbrains mt-1">Calicut, Kerala • Open to remote</p>
+                          <p className="text-white/60 text-xs font-jetbrains mt-1">Calicut, Kerala</p>
                         </div>
                         <span className="ml-auto hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500 text-white text-[11px] font-medium shadow">
                           <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Available
@@ -218,15 +212,7 @@ export default function Hero() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-3 sm:mt-4">
-                  {stats.map((s) => (
-                    <div key={s.label} className="rounded-2xl bg-white/[0.05] border border-white/[0.07] p-3 text-center backdrop-blur">
-                      <div className="text-[18px] sm:text-[19px] font-bold tracking-tight text-foreground">{s.value}</div>
-                      <div className="text-[10px] font-jetbrains tracking-[0.12em] uppercase text-muted-foreground">{s.label}</div>
-                      <div className="text-[11px] text-muted-foreground/70 hidden sm:block">{s.sub}</div>
-                    </div>
-                  ))}
-                </div>
+
               </div>
 
               {/* floating tech pills — replaces removed zsh card */}

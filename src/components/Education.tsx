@@ -53,17 +53,7 @@ export default function Education() {
               </motion.div>
             ))}
 
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="rounded-[20px] border border-dashed border-white/10 p-5 text-center"
-            >
-              <p className="text-sm text-muted-foreground">
-                Continuous learning — <span className="text-foreground font-medium tracking-tight">System design • Cloud • AI engineering</span> • building in public
-              </p>
-            </motion.div>
+
           </div>
         </div>
       </div>
