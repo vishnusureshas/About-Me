@@ -78,8 +78,7 @@ export default function Navbar() {
                 <Command className="w-4 h-4 text-white" />
               </span>
               <span className="hidden sm:flex flex-col items-start leading-none">
-                <span className="text-[11px] font-jetbrains tracking-[0.18em] text-muted-foreground uppercase">Portfolio • 2026</span>
-                <span className="text-[15px] font-space font-semibold tracking-tight text-foreground -mt-0.5">
+                <span className="text-[15px] font-space font-semibold tracking-tight text-foreground">
                   {personalInfo.name.split(" ")[0]} <span className="gradient-text">{personalInfo.name.split(" ").slice(1).join(" ")}</span>
                 </span>
               </span>

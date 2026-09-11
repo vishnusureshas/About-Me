@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, MapPin, Github, Linkedin, Code2, ArrowRight, Sparkles, Terminal, Copy, Check } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin, Code2, ArrowRight, Sparkles, Copy, Check } from "lucide-react"
 import { personalInfo } from "@/lib/data"
 import { useState } from "react"
 
@@ -222,24 +222,6 @@ export default function Hero() {
                   ))}
                 </div>
               </div>
-
-              <motion.div
-                className="absolute -bottom-6 -left-2 sm:-left-6 glass-strong rounded-2xl p-3 sm:p-4 shadow-xl w-[84%] sm:w-[76%] hidden sm:block"
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.9, duration: 0.6 }}
-              >
-                <div className="flex items-center gap-2 mb-2.5">
-                  <span className="w-7 h-7 rounded-lg bg-primary/15 grid place-items-center"><Terminal className="w-3.5 h-3.5 text-primary" /></span>
-                  <span className="text-xs font-jetbrains text-muted-foreground">~/vishnu — zsh</span>
-                  <span className="ml-auto flex gap-1"><span className="w-2.5 h-2.5 rounded-full bg-red-400/80" /><span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" /><span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" /></span>
-                </div>
-                <pre className="text-[11px] leading-relaxed font-jetbrains overflow-hidden">
-                  <span className="text-muted-foreground">$</span> <span className="text-foreground">npx create-impact@latest</span>{"\n"}
-                  <span className="text-emerald-400">✔ ERP • LMS • AI Chat • E-Commerce shipped</span>{"\n"}
-                  <span className="text-muted-foreground">stack: react · next · node · postgres · docker · aws</span>
-                </pre>
-              </motion.div>
 
               <motion.a
                 href={personalInfo.social.github}
