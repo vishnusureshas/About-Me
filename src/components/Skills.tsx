@@ -2,44 +2,36 @@
 
 import { motion } from "framer-motion"
 import { skillCategories } from "@/lib/data"
+import { Layers, Zap } from "lucide-react"
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.07 } },
 }
-
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } },
 }
 
 export default function Skills() {
   return (
-    <section className="py-16 sm:py-20 bg-background" id="skills">
-      <div className="container mx-auto px-6">
+    <section className="relative py-20 sm:py-28" id="skills">
+      <div className="absolute inset-0 bg-muted/20 pointer-events-none" />
+      <div className="container mx-auto px-6 relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="max-w-3xl mx-auto text-center mb-12 sm:mb-14"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            Technical Skills
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[11px] font-jetbrains tracking-[0.16em] uppercase text-muted-foreground">
+            <Layers className="w-3 h-3 text-primary" /> Stack & Tooling
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Technologies I Work With
+          <h2 className="mt-4 font-space font-bold tracking-[-0.03em] text-3xl sm:text-4xl md:text-[42px] leading-none text-foreground">
+            Technologies I <span className="gradient-text">work with</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            From frontend to backend, databases to cloud - here&apos;s my tech stack
-          </p>
+          <p className="mt-4 text-muted-foreground">From frontend to backend, databases to cloud — a complete product engineering stack.</p>
         </motion.div>
 
         <motion.div
@@ -47,41 +39,53 @@ export default function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto"
         >
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
               variants={itemVariants}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="group relative p-6 rounded-2xl bg-card border border-border overflow-hidden"
+              whileHover={{ y: -4 }}
+              className="group relative rounded-[24px] glass-strong p-6 sm:p-7 overflow-hidden card-glow flex flex-col"
             >
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
-              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-[0.06] group-hover:opacity-[0.10] transition-opacity`} />
+              <div className={`absolute -top-16 -right-16 w-40 h-40 bg-gradient-to-br ${category.color} opacity-[0.12] blur-2xl rounded-full pointer-events-none`} />
 
-              <div className="relative z-10">
-                <div
-                  className={`inline-flex items-center justify-center w-8 h-8 rounded bg-gradient-to-br ${category.color} mb-4`}
-                >
-                  <span className="text-white font-bold text-sm">{index + 1}</span>
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-5">
+                  <span className={`w-10 h-10 rounded-xl bg-gradient-to-br ${category.color} grid place-items-center shadow-lg flex-shrink-0`}>
+                    <Zap className="w-5 h-5 text-white" />
+                  </span>
+                  <div>
+                    <h3 className="font-space font-semibold text-[17px] leading-none text-foreground">{category.title}</h3>
+                    <p className="text-[11px] font-jetbrains tracking-wide text-muted-foreground mt-1">{category.skills.length} technologies</p>
+                  </div>
+                  <span className="ml-auto text-xs font-jetbrains text-muted-foreground/60">0{index + 1}</span>
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-4">{category.title}</h3>
+
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
-                    <motion.span
+                    <span
                       key={skill}
-                      whileHover={{ scale: 1.05 }}
-                      className="px-3 py-1.5 rounded-lg bg-muted text-muted-foreground text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
+                      className="px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-[13px] font-medium text-foreground/85 hover:bg-white hover:text-zinc-900 hover:border-white transition-colors cursor-default"
                     >
                       {skill}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center text-xs font-jetbrains tracking-wide text-muted-foreground mt-8"
+        >
+          Always exploring • System design • Cloud • AI-driven development
+        </motion.p>
       </div>
     </section>
   )

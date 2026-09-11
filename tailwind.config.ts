@@ -18,6 +18,8 @@ const config: Config = {
       fontFamily: {
         orbitron: ["var(--font-orbitron)", "sans-serif"],
         inter: ["var(--font-inter)", "sans-serif"],
+        jetbrains: ["var(--font-jetbrains)", "monospace"],
+        space: ["var(--font-space)", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -63,6 +65,9 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         "gradient-shift": "gradient-shift 15s ease infinite",
         glow: "glow 2s ease-in-out infinite alternate",
+        shimmer: "shimmer 2.5s linear infinite",
+        "border-spin": "border-spin 4s linear infinite",
+        aurora: "aurora 12s ease-in-out infinite",
       },
       keyframes: {
         float: {
@@ -77,6 +82,18 @@ const config: Config = {
         glow: {
           from: { boxShadow: "0 0 5px rgba(0, 212, 255, 0.3)" },
           to: { boxShadow: "0 0 30px rgba(0, 212, 255, 0.6), 0 0 60px rgba(123, 47, 247, 0.3)" },
+        },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        "border-spin": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        aurora: {
+          "0%, 100%": { transform: "translate(-10%, -10%) scale(1)", opacity: "0.5" },
+          "50%": { transform: "translate(10%, 5%) scale(1.15)", opacity: "0.8" },
         },
       },
     },

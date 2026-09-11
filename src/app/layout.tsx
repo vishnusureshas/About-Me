@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Inter, Orbitron } from "next/font/google"
+import { Inter, Orbitron, JetBrains_Mono, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 
 const inter = Inter({
@@ -11,6 +11,18 @@ const inter = Inter({
 const orbitron = Orbitron({
   subsets: ["latin"],
   variable: "--font-orbitron",
+  display: "swap",
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
   display: "swap",
 })
 
@@ -26,8 +38,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${orbitron.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${inter.variable} ${orbitron.variable} ${jetbrains.variable} ${spaceGrotesk.variable}`}>
+      <body className="antialiased">{children}</body>
     </html>
   )
 }

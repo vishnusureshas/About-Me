@@ -1,65 +1,69 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { GraduationCap, Calendar } from "lucide-react"
+import { GraduationCap, Calendar, MapPin, Award } from "lucide-react"
 import { education } from "@/lib/data"
 
 export default function Education() {
   return (
-    <section className="py-16 sm:py-20 bg-background" id="education">
-      <div className="container mx-auto px-6">
+    <section className="relative py-20 sm:py-28" id="education">
+      <div className="absolute inset-0 bg-muted/20 pointer-events-none" />
+      <div className="container mx-auto px-6 relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="max-w-3xl mx-auto text-center mb-12 sm:mb-14"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            Education
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[11px] font-jetbrains tracking-[0.16em] uppercase text-muted-foreground">
+            <Award className="w-3 h-3 text-primary" /> Education
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Academic Background
+          <h2 className="mt-4 font-space font-bold tracking-[-0.03em] text-3xl sm:text-4xl md:text-[42px] leading-none text-foreground">
+            Academic <span className="gradient-text">foundation</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Foundation in computer science with practical programming skills
-          </p>
+          <p className="mt-4 text-muted-foreground">Strong CS fundamentals with hands-on product engineering.</p>
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border hidden md:block" />
-
+          <div className="grid gap-6">
             {education.map((edu, index) => (
               <motion.div
                 key={edu.degree}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="relative mb-12 last:mb-0"
+                transition={{ duration: 0.6, delay: index * 0.08 }}
+                className="group relative rounded-[24px] glass-strong p-6 sm:p-8 overflow-hidden card-glow flex flex-col sm:flex-row sm:items-center gap-6"
               >
-                <div className="absolute left-6 w-4 h-4 rounded-full bg-primary border-4 border-background hidden md:block" />
-
-                <div className="md:ml-20 p-6 rounded-2xl bg-card border border-border hover:border-primary/50 transition-colors">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
-                        <GraduationCap className="w-5 h-5 text-primary" />
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="text-lg sm:text-xl font-bold text-foreground break-words">{edu.degree}</h3>
-                        <p className="text-sm text-muted-foreground break-words">{edu.institution}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Calendar className="w-4 h-4" />
-                      <span>{edu.year}</span>
-                    </div>
+                <div className="absolute -top-16 -right-16 w-56 h-56 bg-secondary/10 rounded-full blur-3xl opacity-60 pointer-events-none" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary grid place-items-center flex-shrink-0 shadow-[0_10px_24px_rgba(0,212,255,0.25)]">
+                  <GraduationCap className="w-7 h-7 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-space font-semibold text-lg sm:text-xl tracking-tight text-foreground">{edu.degree}</h3>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/10"><MapPin className="w-3.5 h-3.5 text-primary" /> {edu.institution}</span>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full glass"><Calendar className="w-3.5 h-3.5" /> {edu.year}</span>
                   </div>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 text-xs font-jetbrains tracking-wide text-muted-foreground">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Verified
                 </div>
               </motion.div>
             ))}
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="rounded-[20px] border border-dashed border-white/10 p-5 text-center"
+            >
+              <p className="text-sm text-muted-foreground">
+                Continuous learning — <span className="text-foreground font-medium">System design • Cloud • AI engineering</span> • building in public
+              </p>
+            </motion.div>
           </div>
         </div>
       </div>
