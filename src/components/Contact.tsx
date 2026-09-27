@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
-import { motion } from "framer-motion"
-import { Mail, MapPin, Github, Linkedin, Code2, Send, Loader2, CheckCircle2, AlertCircle, Sparkles, MessageCircle } from "lucide-react"
+import { useState, useEffect, type FormEvent } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Mail, MapPin, Github, Linkedin, Code2, Send, Loader2, CheckCircle2, AlertCircle, Sparkles, MessageCircle, X } from "lucide-react"
 import { personalInfo } from "@/lib/data"
 
 const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api"
@@ -17,6 +17,21 @@ export default function Contact() {
   const [message, setMessage] = useState("")
   const [status, setStatus] = useState<FormStatus>("idle")
   const [error, setError] = useState("")
+
+  // Auto-dismiss alerts: success after 6s, error after 8s
+  useEffect(() => {
+    if (status !== "success" && status !== "error") return
+    const timer = setTimeout(() => {
+      setStatus("idle")
+      setError("")
+    }, status === "success" ? 6000 : 8000)
+    return () => clearTimeout(timer)
+  }, [status])
+
+  const dismissAlert = () => {
+    setStatus("idle")
+    setError("")
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -206,16 +221,26 @@ export default function Contact() {
                 />
               </label>
 
-              {status === "success" && (
-                <motion.div role="status" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm">
-                  <CheckCircle2 className="w-4 h-4 flex-shrink-0" /> Message sent successfully! I&apos;ll get back to you within 24 hours.
-                </motion.div>
-              )}
-              {status === "error" && (
-                <motion.div role="alert" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-2 px-4 py-3 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm">
-                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" /> <span>{error}</span>
-                </motion.div>
-              )}
+              <AnimatePresence>
+                {status === "success" && (
+                  <motion.div key="success" role="status" aria-live="polite" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm">
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                    <span className="flex-1"><span className="font-semibold">Message sent successfully!</span> I&apos;ll get back to you within 24 hours.</span>
+                    <button type="button" onClick={dismissAlert} aria-label="Dismiss notification" className="ml-2 p-1 rounded-lg hover:bg-emerald-500/15 transition-colors focus-ring">
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </motion.div>
+                )}
+                {status === "error" && (
+                  <motion.div key="error" role="alert" aria-live="assertive" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-start gap-2 px-4 py-3 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                    <span className="flex-1">{error}</span>
+                    <button type="button" onClick={dismissAlert} aria-label="Dismiss notification" className="ml-2 p-1 rounded-lg hover:bg-red-500/15 transition-colors focus-ring">
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <motion.button
                 type="submit"
