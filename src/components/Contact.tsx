@@ -125,7 +125,6 @@ export default function Contact() {
                   <span className="min-w-0">
                     <span className="block text-[11px] font-jetbrains tracking-[0.14em] uppercase text-muted-foreground">Location</span>
                     <span className="block text-sm font-medium text-foreground">{personalInfo.location}</span>
-                    <span className="block text-xs text-muted-foreground">Open to remote • IST (UTC+5:30)</span>
                   </span>
                 </div>
               </div>
@@ -152,10 +151,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="mt-7 rounded-2xl bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/10 border border-white/10 p-4 flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-                <p className="text-sm text-foreground/90"><span className="font-semibold">Avg. response time:</span> ~3 hours during IST work hours.</p>
-              </div>
             </div>
           </motion.div>
 
