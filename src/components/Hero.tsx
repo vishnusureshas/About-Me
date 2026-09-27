@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, MapPin, Github, Linkedin, Code2, ArrowRight, Sparkles, Copy, Check, Download, MonitorSmartphone } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin, Code2, ArrowRight, Sparkles, Copy, Check, Download } from "lucide-react"
 import { personalInfo } from "@/lib/data"
 import { useEffect, useState } from "react"
 import DottedWaves from "@/components/DottedWaves"
@@ -132,30 +132,10 @@ export default function Hero() {
               </div>
 
               <div className="relative rounded-[1.8rem] opaque-glass protrude overflow-hidden p-3">
-                <div className="flex items-center gap-1.5 px-2 py-1">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-                  <span className="ml-2 text-[11px] font-jetbrains text-muted-foreground flex items-center gap-1.5">
-                    <MonitorSmartphone className="w-3.5 h-3.5" /> portfolio — fullscreen
-                  </span>
-                </div>
                 <div className="relative rounded-[1.2rem] overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10">
                   <div className="relative aspect-[4/4.4]">
                     <img src="/profile.jpeg" alt={personalInfo.name} className="w-full h-full object-cover" loading="eager" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-cyan-500/10" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <div className="flex items-center gap-3 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 p-3">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-violet-600 grid place-items-center font-bold text-sm text-white shadow-[0_0_18px_rgba(0,212,255,0.5)]">VS</div>
-                        <div>
-                          <p className="text-white text-sm font-semibold leading-none">Available for work</p>
-                          <p className="text-white/60 text-xs font-jetbrains mt-1">Calicut, Kerala • Remote</p>
-                        </div>
-                        <span className="ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500 text-white text-[11px] font-medium">
-                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Live
-                        </span>
-                      </div>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/50 via-transparent to-cyan-500/10" />
                   </div>
                 </div>
               </div>
