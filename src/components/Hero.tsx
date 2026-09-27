@@ -3,11 +3,90 @@
 import { motion } from "framer-motion"
 import { Mail, MapPin, Github, Linkedin, Code2, ArrowRight, Sparkles, Copy, Check, Download, MonitorSmartphone } from "lucide-react"
 import { personalInfo } from "@/lib/data"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import DottedWaves from "@/components/DottedWaves"
+
+const GREETING = "Hello, I'm"
+const FULL_NAME = personalInfo.name
+const FULL_ROLE = personalInfo.title
+
+function useTypewriter() {
+  const [greet, setGreet] = useState("")
+  const [name, setName] = useState("")
+  const [role, setRole] = useState("")
+  const [started, setStarted] = useState(false)
+  const [done, setDone] = useState(false)
+  const timers = useRef<number[]>([])
+
+  useEffect(() => {
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    if (reduced) {
+      setGreet(GREETING)
+      setName(FULL_NAME)
+      setRole(FULL_ROLE)
+      setStarted(true)
+      setDone(true)
+      return
+    }
+    let cancelled = false
+    const later = (fn: () => void, ms: number) => {
+      const id = window.setTimeout(() => {
+        if (!cancelled) fn()
+      }, ms)
+      timers.current.push(id)
+    }
+    const typeText = (text: string, set: (s: string) => void, speed: number, next: () => void) => {
+      let i = 0
+      const step = () => {
+        if (cancelled) return
+        i += 1
+        set(text.slice(0, i))
+        if (i < text.length) {
+          const id = window.setTimeout(step, speed + Math.random() * 40)
+          timers.current.push(id)
+        } else {
+          later(next, 320)
+        }
+      }
+      step()
+    }
+
+    const begin = () => {
+      if (cancelled) return
+      setStarted(true)
+      typeText(GREETING, setGreet, 55, () =>
+        typeText(FULL_NAME, setName, 95, () =>
+          typeText(FULL_ROLE, setRole, 42, () => setDone(true))
+        )
+      )
+    }
+
+    if ((window as unknown as { __portfolioReady?: boolean }).__portfolioReady) {
+      later(begin, 350)
+    } else {
+      const onReady = () => later(begin, 250)
+      window.addEventListener("preloader:done", onReady)
+      // fallback in case the event is missed
+      later(begin, 3800)
+      return () => {
+        cancelled = true
+        window.removeEventListener("preloader:done", onReady)
+        timers.current.forEach(clearTimeout)
+      }
+    }
+    return () => {
+      cancelled = true
+      timers.current.forEach(clearTimeout)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return { greet, name, role, started, done }
+}
 
 export default function Hero() {
   const [copied, setCopied] = useState(false)
+  const { greet, name, role, started, done } = useTypewriter()
   const copyEmail = async () => {
     await navigator.clipboard.writeText(personalInfo.email)
     setCopied(true)
@@ -15,14 +94,12 @@ export default function Hero() {
   }
 
   const downloadCV = () => {
-    const cv = `${personalInfo.name}\n${personalInfo.title}\n${personalInfo.location}\n${personalInfo.email}\n\n${personalInfo.tagline}\n\n${personalInfo.bio}\n\nGitHub: ${personalInfo.social.github}\nLinkedIn: ${personalInfo.social.linkedin}\n`
-    const blob = new Blob([cv], { type: "text/plain" })
-    const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
-    a.href = url
-    a.download = `${personalInfo.name.replace(/\s+/g, "-")}-CV.txt`
+    a.href = "/cv/Vishnu-AS-CV.pdf"
+    a.download = "Vishnu-AS-CV.pdf"
+    document.body.appendChild(a)
     a.click()
-    URL.revokeObjectURL(url)
+    a.remove()
   }
 
   return (
@@ -114,21 +191,46 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.14 }}
-              className="font-jetbrains text-[13px] tracking-[0.22em] uppercase text-cyan-300/90"
+              className="font-jetbrains text-[13px] tracking-[0.22em] uppercase text-cyan-300/90 min-h-[20px]"
+              aria-label={GREETING}
             >
-              Hello, I&apos;m
+              <span aria-hidden="true">
+                {greet}
+                {started && !name && (
+                  <span className="ml-0.5 inline-block w-[2px] h-[14px] translate-y-[2px] bg-cyan-300 animate-pulse shadow-[0_0_10px_rgba(0,212,255,0.9)]" />
+                )}
+              </span>
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.18 }}
               className="font-space font-bold tracking-[-0.032em] leading-[0.95] text-balance mt-2"
+              aria-label={`${GREETING} ${FULL_NAME}, ${FULL_ROLE}`}
             >
-              <span className="block text-5xl sm:text-6xl md:text-[4.6rem] drop-shadow-[0_8px_32px_rgba(0,212,255,0.15)]">
-                <span className="text-white">{personalInfo.name.split(" ")[0]}</span>{" "}
-                <span className="gradient-text">{personalInfo.name.split(" ").slice(1).join(" ")}</span>
+              <span aria-hidden="true" className="block text-5xl sm:text-6xl md:text-[4.6rem] drop-shadow-[0_8px_32px_rgba(0,212,255,0.15)] min-h-[1.1em]">
+                {(() => {
+                  const cut = name.indexOf(" ")
+                  const first = cut === -1 ? name : name.slice(0, cut)
+                  const rest = cut === -1 ? "" : name.slice(cut + 1)
+                  const typingName = name.length > 0 && name.length < FULL_NAME.length
+                  return (
+                    <>
+                      <span className="text-white">{first}</span>
+                      {rest ? <span className="gradient-text"> {rest}</span> : name ? " " : null}
+                      {typingName && (
+                        <span className="ml-1 inline-block w-[3px] h-[0.9em] translate-y-[0.08em] bg-gradient-to-b from-cyan-300 to-violet-400 animate-pulse shadow-[0_0_14px_rgba(0,212,255,0.9)]" />
+                      )}
+                    </>
+                  )
+                })()}
               </span>
-              <span className="block mt-3 text-xl sm:text-2xl font-medium tracking-tight text-white/90">{personalInfo.title}</span>
+              <span aria-hidden="true" className="block mt-3 text-xl sm:text-2xl font-medium tracking-tight text-white/90 min-h-[1.6em]">
+                {role}
+                {!done && name.length === FULL_NAME.length && (
+                  <span className="ml-1 inline-block w-[2px] h-[1.1em] translate-y-[3px] bg-white/80 animate-pulse" />
+                )}
+              </span>
             </motion.h1>
 
             <motion.p
