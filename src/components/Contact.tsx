@@ -101,7 +101,8 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="space-y-5"
           >
-            <div className="rounded-[28px] glass-strong premium-ring overflow-hidden p-7 sm:p-8 relative">
+            <div className="rounded-[28px] opaque-glass protrude overflow-hidden p-7 sm:p-8 relative">
+              <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent" />
               <div className="absolute -top-20 -right-20 w-56 h-56 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
               <h3 className="font-space font-semibold text-xl tracking-tight text-foreground">Contact information</h3>
               <p className="text-sm text-muted-foreground mt-2">Prefer email or a quick call — I&apos;m responsive and open to remote.</p>
@@ -159,8 +160,9 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="rounded-[28px] glass-strong premium-ring p-6 sm:p-8 relative overflow-hidden"
+            className="rounded-[28px] opaque-glass protrude p-6 sm:p-8 relative overflow-hidden"
           >
+            <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-pink-400/50 to-transparent" />
             <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-secondary/10 rounded-full blur-3xl pointer-events-none" />
             <div className="flex items-start justify-between gap-4 mb-6 relative">
               <div>
@@ -242,7 +244,7 @@ export default function Contact() {
                 disabled={status === "loading"}
                 whileHover={status === "loading" ? undefined : { scale: 1.01 }}
                 whileTap={status === "loading" ? undefined : { scale: 0.99 }}
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-medium shadow-[0_10px_30px_rgba(0,212,255,0.25)] hover:shadow-[0_12px_36px_rgba(0,212,255,0.32)] transition-all disabled:opacity-60 disabled:cursor-not-allowed focus-ring"
+                className="neon-btn w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 to-violet-600 text-white font-medium transition-all disabled:opacity-60 disabled:cursor-not-allowed focus-ring"
               >
                 {status === "loading" ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</> : <><Send className="w-4 h-4" /> Send message</>}
               </motion.button>

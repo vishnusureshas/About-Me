@@ -34,8 +34,9 @@ export default function Education() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.08 }}
-                className="group relative rounded-[24px] glass-strong premium-ring p-6 sm:p-8 overflow-hidden card-glow flex flex-col sm:flex-row sm:items-center gap-6"
+                className="group relative rounded-[24px] opaque-glass protrude p-6 sm:p-8 overflow-hidden flex flex-col sm:flex-row sm:items-center gap-6"
               >
+                <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/50 to-transparent" />
                 <div className="absolute -top-16 -right-16 w-56 h-56 bg-secondary/10 rounded-full blur-3xl opacity-60 pointer-events-none" />
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary grid place-items-center flex-shrink-0 shadow-[0_10px_24px_rgba(0,212,255,0.25)]">
                   <GraduationCap className="w-7 h-7 text-white" />

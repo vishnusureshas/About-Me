@@ -58,7 +58,8 @@ export default function Experience() {
                   </div>
 
                   <div className="flex-1 sm:pl-10 md:pl-0">
-                    <div className="group relative rounded-[24px] glass-strong p-6 sm:p-7 card-glow overflow-hidden hover:border-white/15 transition-colors">
+                    <div className="group relative rounded-[24px] opaque-glass protrude p-6 sm:p-7 overflow-hidden hover:border-cyan-400/20 transition-colors">
+                      <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent" />
                       <div className="absolute -top-20 -right-20 w-56 h-56 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
                       <div className="flex items-start gap-4">
                         <span className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary to-secondary grid place-items-center flex-shrink-0 shadow-[0_8px_20px_rgba(0,212,255,0.28)] group-hover:scale-105 transition-transform">

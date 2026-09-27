@@ -7,7 +7,8 @@ import { personalInfo } from "@/lib/data"
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.06]">
+    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-[#05070f]">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 via-violet-500/40 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-background to-background pointer-events-none" />
       <div className="absolute inset-0 animated-grid opacity-30 pointer-events-none" />
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] h-[240px] bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 blur-[50px] rounded-full pointer-events-none" />
