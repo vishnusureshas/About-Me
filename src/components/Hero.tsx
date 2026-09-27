@@ -135,7 +135,14 @@ export default function Hero() {
                 <div className="relative rounded-[1.2rem] overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10">
                   <div className="relative aspect-[4/4.4]">
                     <img src="/profile.jpeg" alt={personalInfo.name} className="w-full h-full object-cover" loading="eager" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/50 via-transparent to-cyan-500/10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-cyan-500/10" />
+                    <div className="absolute inset-x-0 bottom-0 p-4 pt-10">
+                      <p className="font-space text-lg font-bold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{personalInfo.name}</p>
+                      <p className="mt-0.5 text-[13px] font-semibold text-cyan-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{personalInfo.title}</p>
+                      <p className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-2.5 py-1 font-jetbrains text-[11px] text-white/75 backdrop-blur-md">
+                        <MapPin className="h-3 w-3 text-pink-300" /> Calicut, Kerala
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
