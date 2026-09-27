@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect, type FormEvent } from "react"
+import { useState, useEffect, useCallback, type FormEvent } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Mail, MapPin, Github, Linkedin, Code2, Send, Loader2, CheckCircle2, AlertCircle, MessageCircle, X, Clock3, ShieldCheck } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin, Code2, Send, Loader2, Check, AlertCircle, MessageCircle, X, Clock3, ShieldCheck, Sparkles, PartyPopper } from "lucide-react"
 import { personalInfo } from "@/lib/data"
 import SectionHeading from "@/components/SectionHeading"
 
@@ -20,13 +20,15 @@ export default function Contact() {
   const [message, setMessage] = useState("")
   const [status, setStatus] = useState<FormStatus>("idle")
   const [error, setError] = useState("")
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
+  const [sentName, setSentName] = useState("")
 
   useEffect(() => {
-    if (status !== "success" && status !== "error") return
+    if (status !== "error") return
     const timer = setTimeout(() => {
       setStatus("idle")
       setError("")
-    }, status === "success" ? 6000 : 8000)
+    }, 8000)
     return () => clearTimeout(timer)
   }, [status])
 
@@ -34,6 +36,26 @@ export default function Contact() {
     setStatus("idle")
     setError("")
   }
+
+  const closeSuccessModal = useCallback(() => {
+    setShowSuccessModal(false)
+    setStatus("idle")
+  }, [])
+
+  // Lock body scroll + close on Escape while the success modal is open
+  useEffect(() => {
+    if (!showSuccessModal) return
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeSuccessModal()
+    }
+    window.addEventListener("keydown", onKey)
+    return () => {
+      document.body.style.overflow = originalOverflow
+      window.removeEventListener("keydown", onKey)
+    }
+  }, [showSuccessModal, closeSuccessModal])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -60,7 +82,9 @@ export default function Contact() {
         const serverMsg = (data as { error?: string })?.error
         throw new Error(serverMsg || "Failed to send your message. Please try again.")
       }
+      setSentName(name.trim())
       setStatus("success")
+      setShowSuccessModal(true)
       setName(""); setEmail(""); setSubject(""); setMessage("")
     } catch (err) {
       setStatus("error")
@@ -203,15 +227,6 @@ export default function Contact() {
               </label>
 
               <AnimatePresence>
-                {status === "success" && (
-                  <motion.div key="success" role="status" aria-live="polite" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-400/25 text-emerald-200 text-sm shadow-[0_0_24px_rgba(16,185,129,0.2)]">
-                    <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-                    <span className="flex-1"><span className="font-semibold">Message sent!</span> I&apos;ll reply within 24 hours.</span>
-                    <button type="button" onClick={dismissAlert} aria-label="Dismiss notification" className="ml-2 p-1 rounded-lg hover:bg-emerald-500/15 transition-colors focus-ring">
-                      <X className="w-3.5 h-3.5" />
-                    </button>
-                  </motion.div>
-                )}
                 {status === "error" && (
                   <motion.div key="error" role="alert" aria-live="assertive" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-start gap-2 px-4 py-3 rounded-2xl bg-red-500/10 border border-red-400/25 text-red-200 text-sm">
                     <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
@@ -236,6 +251,187 @@ export default function Contact() {
           </motion.div>
         </div>
       </div>
+
+      {/* ── Beautiful success modal ─────────────────────────────────── */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div
+            key="contact-success-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-success-title"
+            aria-describedby="contact-success-desc"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[90] flex items-center justify-center p-4 sm:p-6"
+          >
+            {/* Backdrop */}
+            <motion.button
+              type="button"
+              aria-label="Close success message"
+              onClick={closeSuccessModal}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-[#04060d]/80 backdrop-blur-md cursor-default"
+            />
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[380px] bg-gradient-to-r from-cyan-500/20 via-violet-600/20 to-pink-500/20 blur-[90px] rounded-full" />
+            </div>
+
+            {/* Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, y: 32 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 16 }}
+              transition={{ type: "spring", stiffness: 320, damping: 26 }}
+              className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-white/12 bg-[#0a0f1e]/95 shadow-[0_32px_100px_rgba(0,0,0,0.6),0_0_60px_rgba(0,212,255,0.12)] backdrop-blur-xl"
+            >
+              <div className="absolute inset-x-10 top-0 h-[3px] rounded-full bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500" />
+              <div className="absolute -top-20 -left-20 w-56 h-56 bg-cyan-500/15 blur-[60px] rounded-full pointer-events-none" />
+              <div className="absolute -bottom-20 -right-20 w-56 h-56 bg-fuchsia-600/15 blur-[60px] rounded-full pointer-events-none" />
+
+              {/* Confetti sparkles */}
+              <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                {[
+                  { left: "12%", top: "18%", delay: 0, size: 14, color: "text-cyan-300" },
+                  { left: "84%", top: "22%", delay: 0.15, size: 12, color: "text-pink-300" },
+                  { left: "20%", top: "68%", delay: 0.3, size: 10, color: "text-violet-300" },
+                  { left: "78%", top: "70%", delay: 0.45, size: 14, color: "text-emerald-300" },
+                  { left: "50%", top: "10%", delay: 0.2, size: 10, color: "text-amber-200" },
+                  { left: "66%", top: "38%", delay: 0.35, size: 9, color: "text-cyan-200" },
+                ].map((p, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, scale: 0, rotate: -30, y: 8 }}
+                    animate={{ opacity: [0, 1, 1, 0.9], scale: [0, 1.2, 1, 1], rotate: 20, y: [8, -6, 0] }}
+                    transition={{ delay: 0.25 + p.delay, duration: 1.4, repeat: Infinity, repeatDelay: 2.2 }}
+                    style={{ left: p.left, top: p.top }}
+                    className={`absolute ${p.color}`}
+                  >
+                    <Sparkles style={{ width: p.size, height: p.size }} />
+                  </motion.span>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={closeSuccessModal}
+                aria-label="Close"
+                className="absolute top-4 right-4 z-10 p-2 rounded-xl bg-white/5 border border-white/10 text-muted-foreground hover:text-white hover:bg-white/10 hover:border-white/20 transition-all focus-ring"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="relative px-7 sm:px-9 pt-10 pb-7 text-center">
+                {/* Animated check */}
+                <div className="relative mx-auto w-fit">
+                  <motion.div
+                    animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.9, 0.5] }}
+                    transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute -inset-3 rounded-full bg-gradient-to-r from-emerald-400/30 via-cyan-400/30 to-violet-500/30 blur-xl"
+                    aria-hidden="true"
+                  />
+                  <motion.div
+                    initial={{ scale: 0, rotate: -30 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.1 }}
+                    className="relative w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 grid place-items-center border border-white/30 shadow-[0_16px_50px_rgba(16,185,129,0.45)]"
+                  >
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 15, delay: 0.3 }}
+                    >
+                      <Check className="w-10 h-10 text-white" strokeWidth={3} />
+                    </motion.span>
+                  </motion.div>
+                  <motion.span
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.45, type: "spring", stiffness: 300, damping: 14 }}
+                    className="absolute -top-1 -right-2 w-8 h-8 rounded-2xl bg-gradient-to-br from-pink-500 to-violet-600 grid place-items-center border border-white/25 shadow-lg"
+                  >
+                    <PartyPopper className="w-4 h-4 text-white" />
+                  </motion.span>
+                </div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.45 }}
+                >
+                  <p className="mt-6 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-300/25 text-[11px] font-jetbrains tracking-[0.18em] uppercase text-emerald-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
+                    Delivered successfully
+                  </p>
+                  <h3 id="contact-success-title" className="mt-4 font-space font-bold text-2xl sm:text-[26px] tracking-tight text-white leading-tight">
+                    Thank you{sentName ? `, ${sentName}` : ""}!{" "}
+                    <span className="bg-gradient-to-r from-cyan-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
+                      Message sent.
+                    </span>
+                  </h3>
+                  <p id="contact-success-desc" className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                    Your message has landed safely in my inbox. I&apos;ll read it carefully
+                    and reply within <span className="text-white font-semibold">24 hours</span>.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.32, duration: 0.4 }}
+                  className="mt-5 grid grid-cols-2 gap-2.5 text-left"
+                >
+                  <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
+                    <span className="w-9 h-9 rounded-xl bg-cyan-400/15 border border-cyan-300/20 grid place-items-center flex-shrink-0">
+                      <Clock3 className="w-4 h-4 text-cyan-200" />
+                    </span>
+                    <span>
+                      <span className="block text-xs font-semibold text-white">24h reply</span>
+                      <span className="block text-[11px] text-muted-foreground">Fast response</span>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
+                    <span className="w-9 h-9 rounded-xl bg-emerald-400/15 border border-emerald-300/20 grid place-items-center flex-shrink-0">
+                      <ShieldCheck className="w-4 h-4 text-emerald-200" />
+                    </span>
+                    <span>
+                      <span className="block text-xs font-semibold text-white">Private</span>
+                      <span className="block text-[11px] text-muted-foreground">No spam, ever</span>
+                    </span>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                  className="mt-6 flex flex-col sm:flex-row gap-2.5"
+                >
+                  <button
+                    type="button"
+                    onClick={closeSuccessModal}
+                    className="neon-btn shimmer flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-violet-600 to-fuchsia-600 text-white text-sm font-semibold shadow-[0_12px_40px_rgba(123,47,247,0.35)] hover:brightness-110 transition-all focus-ring"
+                  >
+                    <Send className="w-4 h-4" />
+                    Send another message
+                  </button>
+                  <button
+                    type="button"
+                    onClick={closeSuccessModal}
+                    className="px-6 py-3.5 rounded-full text-sm font-semibold text-muted-foreground hover:text-white bg-white/[0.04] border border-white/10 hover:border-white/25 hover:bg-white/[0.08] transition-all focus-ring"
+                  >
+                    Close
+                  </button>
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
