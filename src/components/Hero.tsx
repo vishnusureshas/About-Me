@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Mail, MapPin, Github, Linkedin, Code2, ArrowRight, Sparkles, Copy, Check, Download, MonitorSmartphone } from "lucide-react"
 import { personalInfo } from "@/lib/data"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import DottedWaves from "@/components/DottedWaves"
 
 const GREETING = "Hello, I'm"
@@ -11,77 +11,74 @@ const FULL_NAME = personalInfo.name
 const FULL_ROLE = personalInfo.title
 
 function useTypewriter() {
-  const [greet, setGreet] = useState("")
-  const [name, setName] = useState("")
-  const [role, setRole] = useState("")
-  const [started, setStarted] = useState(false)
-  const [done, setDone] = useState(false)
-  const timers = useRef<number[]>([])
+  // stage: 0 waiting → 1 greeting → 2 name → 3 role → 4 complete
+  const [live, setLive] = useState(false)
+  const [stage, setStage] = useState(0)
+  const [chars, setChars] = useState(0)
+  const [instant, setInstant] = useState(false)
 
+  // Start trigger: loader event, already-ready flag, or timed fallback
   useEffect(() => {
-    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    let cancelled = false
+    const timers: number[] = []
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
     if (reduced) {
-      setGreet(GREETING)
-      setName(FULL_NAME)
-      setRole(FULL_ROLE)
-      setStarted(true)
-      setDone(true)
+      setInstant(true)
+      setLive(true)
+      setStage(4)
       return
     }
-    let cancelled = false
-    const later = (fn: () => void, ms: number) => {
-      const id = window.setTimeout(() => {
-        if (!cancelled) fn()
-      }, ms)
-      timers.current.push(id)
+    const go = () => {
+      if (!cancelled) setLive(true)
     }
-    const typeText = (text: string, set: (s: string) => void, speed: number, next: () => void) => {
-      let i = 0
-      const step = () => {
-        if (cancelled) return
-        i += 1
-        set(text.slice(0, i))
-        if (i < text.length) {
-          const id = window.setTimeout(step, speed + Math.random() * 40)
-          timers.current.push(id)
-        } else {
-          later(next, 320)
-        }
-      }
-      step()
-    }
-
-    const begin = () => {
-      if (cancelled) return
-      setStarted(true)
-      typeText(GREETING, setGreet, 55, () =>
-        typeText(FULL_NAME, setName, 95, () =>
-          typeText(FULL_ROLE, setRole, 42, () => setDone(true))
-        )
-      )
-    }
-
     if ((window as unknown as { __portfolioReady?: boolean }).__portfolioReady) {
-      later(begin, 350)
+      timers.push(window.setTimeout(go, 350))
     } else {
-      const onReady = () => later(begin, 250)
+      const onReady = () => {
+        timers.push(window.setTimeout(go, 250))
+      }
       window.addEventListener("preloader:done", onReady)
-      // fallback in case the event is missed
-      later(begin, 3800)
+      timers.push(window.setTimeout(go, 3800))
       return () => {
         cancelled = true
         window.removeEventListener("preloader:done", onReady)
-        timers.current.forEach(clearTimeout)
+        timers.forEach(clearTimeout)
       }
     }
     return () => {
       cancelled = true
-      timers.current.forEach(clearTimeout)
+      timers.forEach(clearTimeout)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { greet, name, role, started, done }
+  // Single-timeout typing machine — one timer at a time, always cleaned up
+  useEffect(() => {
+    if (!live || instant || stage >= 4) return
+    if (stage === 0) {
+      const t = window.setTimeout(() => {
+        setStage(1)
+        setChars(0)
+      }, 150)
+      return () => clearTimeout(t)
+    }
+    const texts = [GREETING, FULL_NAME, FULL_ROLE]
+    const speeds = [55, 95, 42]
+    const text = texts[stage - 1]
+    if (chars < text.length) {
+      const t = window.setTimeout(() => setChars((c) => c + 1), speeds[stage - 1] + Math.random() * 35)
+      return () => clearTimeout(t)
+    }
+    const t = window.setTimeout(() => {
+      setStage((s) => s + 1)
+      setChars(0)
+    }, 340)
+    return () => clearTimeout(t)
+  }, [live, stage, chars, instant])
+
+  const greet = instant ? GREETING : stage > 1 ? GREETING : stage === 1 ? GREETING.slice(0, chars) : ""
+  const name = instant ? FULL_NAME : stage > 2 ? FULL_NAME : stage === 2 ? FULL_NAME.slice(0, chars) : ""
+  const role = instant ? FULL_ROLE : stage > 3 ? FULL_ROLE : stage === 3 ? FULL_ROLE.slice(0, chars) : ""
+  return { greet, name, role, started: live, done: live && (instant || stage >= 4) }
 }
 
 export default function Hero() {
@@ -94,9 +91,11 @@ export default function Hero() {
   }
 
   const downloadCV = () => {
+    // Serves the byte-identical copy of the original `src/cv/Vishnu AS.pdf`
+    // (Next.js can only serve files from `public/`), saved under the original name.
     const a = document.createElement("a")
     a.href = "/cv/Vishnu-AS-CV.pdf"
-    a.download = "Vishnu-AS-CV.pdf"
+    a.download = "Vishnu AS.pdf"
     document.body.appendChild(a)
     a.click()
     a.remove()
