@@ -2,6 +2,7 @@ import express from "express"
 import Contact from "../models/Contact.js"
 import { cacheMiddleware, invalidateCache } from "../middleware/cache.js"
 import { rateLimiter } from "../middleware/rateLimitRedis.js"
+import { sendContactNotification } from "../config/mailer.js"
 
 const router = express.Router()
 
@@ -65,6 +66,8 @@ router.post("/contacts", rateLimiter({ windowSeconds: 900, max: 5, keyPrefix: "r
     const contact = await Contact.create(sanitized)
     // Invalidate contacts list cache
     await invalidateCache("contacts:list")
+    // Realtime Gmail notification to owner (fire-and-forget, never blocks response)
+    sendContactNotification(sanitized)
     // Touch session (creates session for anonymous user)
     if (req.session) {
       req.session.lastContactAt = new Date().toISOString()
