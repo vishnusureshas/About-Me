@@ -1,70 +1,66 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Github, Linkedin, Code2, ArrowUpRight, Heart } from "lucide-react"
+import { Github, Linkedin, Code2, ArrowUpRight, Heart, Sparkles } from "lucide-react"
 import { personalInfo } from "@/lib/data"
 
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-[#05070f]">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 via-violet-500/40 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-background to-background pointer-events-none" />
-      <div className="absolute inset-0 animated-grid opacity-30 pointer-events-none" />
-      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] h-[240px] bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 blur-[50px] rounded-full pointer-events-none" />
+    <footer className="relative overflow-hidden bg-[#04060d]">
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 via-violet-500 to-transparent opacity-80" />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[280px] bg-gradient-to-r from-cyan-500/10 via-violet-600/12 to-pink-500/10 blur-[70px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 relative">
-        <div className="py-10 sm:py-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-          <div>
-            <a href="#hero" onClick={(e) => { e.preventDefault(); document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" }) }} className="inline-flex items-center gap-2.5 focus-ring rounded-full">
-              <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary grid place-items-center shadow-[0_8px_20px_rgba(0,212,255,0.25)]">
-                <Code2 className="w-4 h-4 text-white" />
-              </span>
-              <span className="font-space font-bold tracking-tight text-foreground text-lg">
-                {personalInfo.name.split(" ")[0]} <span className="gradient-text">{personalInfo.name.split(" ").slice(1).join(" ")}</span>
-              </span>
-            </a>
-            <p className="mt-2 text-sm text-muted-foreground max-w-md">
-              {personalInfo.title} — {personalInfo.tagline}
-            </p>
-            <p className="mt-1 text-xs font-jetbrains text-muted-foreground/70">{personalInfo.location} • {personalInfo.email}</p>
+        <div className="mt-10 rounded-[28px] opaque-glass protrude p-7 sm:p-9 flex flex-col lg:flex-row lg:items-center gap-7 overflow-hidden">
+          <div className="absolute inset-x-12 top-0 h-[2px] bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500 opacity-70" />
+          <div className="flex items-start gap-4 flex-1">
+            <span className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-400 via-violet-500 to-fuchsia-500 grid place-items-center border border-white/20 shadow-[0_10px_30px_rgba(0,212,255,0.3)] flex-shrink-0">
+              <Code2 className="w-5 h-5 text-white" />
+            </span>
+            <div>
+              <p className="inline-flex items-center gap-1.5 text-[11px] font-jetbrains tracking-[0.2em] uppercase text-cyan-200/80">
+                <Sparkles className="w-3.5 h-3.5" /> Have an idea in mind?
+              </p>
+              <p className="mt-1 font-space font-bold text-xl sm:text-2xl text-white tracking-tight">
+                Let&apos;s turn it into <span className="gradient-text">something great</span>
+              </p>
+              <p className="mt-1.5 text-sm text-muted-foreground max-w-lg">
+                {personalInfo.title} — {personalInfo.tagline}
+              </p>
+            </div>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
-            <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch sm:items-center gap-3">
+            <div className="flex gap-2 justify-center">
               {[
                 { href: personalInfo.social.github, icon: Github, label: "GitHub" },
                 { href: personalInfo.social.linkedin, icon: Linkedin, label: "LinkedIn" },
                 { href: personalInfo.social.leetcode, icon: Code2, label: "LeetCode" },
               ].map(({ href, icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-10 h-10 rounded-xl glass grid place-items-center hover:scale-105 hover:border-primary/20 transition-all focus-ring"
-                >
-                  <Icon className="w-4 h-4 text-foreground" />
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="illum-tile w-11 h-11 rounded-2xl grid place-items-center focus-ring">
+                  <Icon className="w-[18px] h-[18px] text-white" />
                 </a>
               ))}
             </div>
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }) }}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors focus-ring w-fit"
+              className="neon-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-violet-600 text-white text-sm font-semibold focus-ring whitespace-nowrap"
             >
               Start a project <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
         </div>
 
-        <div className="py-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div className="py-7 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
           <p className="text-muted-foreground text-center sm:text-left inline-flex items-center gap-1.5 flex-wrap justify-center">
-            © {year} Crafted with <Heart className="w-3 h-3 text-accent fill-accent" /> by {personalInfo.name}
+            © {year} Crafted with <Heart className="w-3 h-3 text-pink-400 fill-pink-400 drop-shadow-[0_0_8px_rgba(255,74,149,0.8)]" /> by {personalInfo.name}
+            <span className="hidden sm:inline text-muted-foreground/50">•</span>
+            <span className="font-jetbrains text-muted-foreground/70">{personalInfo.email}</span>
           </p>
           <div className="flex items-center gap-4 font-jetbrains tracking-wide text-muted-foreground">
-            <span className="hidden sm:inline-flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> All systems operational</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-300/20 text-emerald-200">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" /> Operational
+            </span>
             <span>Calicut, IN</span>
           </div>
         </div>
