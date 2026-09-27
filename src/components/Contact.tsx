@@ -5,7 +5,9 @@ import { motion } from "framer-motion"
 import { Mail, MapPin, Github, Linkedin, Code2, Send, Loader2, CheckCircle2, AlertCircle, Sparkles, MessageCircle } from "lucide-react"
 import { personalInfo } from "@/lib/data"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api"
+const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api"
+// Normalize: remove trailing slash so `${API_URL}/contacts` is always correct
+const API_URL = RAW_API_URL.replace(/\/+$/, "")
 type FormStatus = "idle" | "loading" | "success" | "error"
 
 export default function Contact() {
@@ -36,12 +38,22 @@ export default function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: name.trim(), email: email.trim(), subject: subject.trim(), message: message.trim() }),
       })
-      if (!response.ok) throw new Error("Failed to send your message. Please try again.")
+      const data = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        const serverMsg = (data as { error?: string })?.error
+        throw new Error(serverMsg || "Failed to send your message. Please try again.")
+      }
       setStatus("success")
       setName(""); setEmail(""); setSubject(""); setMessage("")
-    } catch {
+    } catch (err) {
       setStatus("error")
-      setError("Something went wrong. Please check your connection and try again.")
+      const msg = err instanceof Error ? err.message : "Something went wrong. Please check your connection and try again."
+      // Network failure (server down) has no response — show connection hint
+      if (msg === "Failed to fetch" || msg.includes("fetch")) {
+        setError("Cannot reach server. Ensure backend is running on " + API_URL)
+      } else {
+        setError(msg)
+      }
     }
   }
 

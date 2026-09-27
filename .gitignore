@@ -5,6 +5,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+body*.txt
+c.txt
+cookies.txt
+cookies*.txt
+server/*.log
+server/**/*.log
 
 node_modules/
 .next/
