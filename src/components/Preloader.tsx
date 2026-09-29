@@ -121,9 +121,6 @@ export default function Preloader() {
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   aria-hidden="true"
                 />
-                <span className="relative font-space text-5xl font-bold tabular-nums leading-none text-white drop-shadow-[0_0_18px_rgba(0,212,255,0.45)]">
-                  {progress}
-                </span>
                 <span className="relative h-px w-10 bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" aria-hidden="true" />
                 <span className="relative font-jetbrains text-[10px] uppercase tracking-[0.3em] text-cyan-300/80">
                   {progress < 100 ? "Loading" : "Ready"}
@@ -183,15 +180,11 @@ export default function Preloader() {
 
             {/* linear bar + boot checklist */}
             <div className="mt-5 w-64 sm:w-80">
-              <div className="flex items-center gap-3">
-                <span className="font-jetbrains text-[10px] tabular-nums text-muted-foreground">0</span>
-                <div className="relative h-[6px] flex-1 overflow-hidden rounded-full border border-white/10 bg-white/[0.06]">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500 shadow-[0_0_16px_rgba(0,212,255,0.7)] transition-[width] duration-150"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-                <span className="font-jetbrains text-[10px] tabular-nums text-muted-foreground">100</span>
+              <div className="relative h-[6px] overflow-hidden rounded-full border border-white/10 bg-white/[0.06]">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500 shadow-[0_0_16px_rgba(0,212,255,0.7)] transition-[width] duration-150"
+                  style={{ width: `${progress}%` }}
+                />
               </div>
 
               <ul className="mt-5 space-y-2 text-left">
