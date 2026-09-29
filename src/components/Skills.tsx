@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Code2, Layout, Smartphone, Server, Database, Cloud, Wrench, Cpu, Boxes, Network, Layers3, GitBranch, Container } from "lucide-react"
 import { skillCategories } from "@/lib/data"
@@ -41,9 +42,11 @@ const brandIcon: Record<string, string> = {
   Firebase: "https://cdn.simpleicons.org/firebase",
   Supabase: "https://cdn.simpleicons.org/supabase",
   Redis: "https://cdn.simpleicons.org/redis",
-  AWS: "https://cdn.simpleicons.org/amazonwebservices",
-  EC2: "https://cdn.simpleicons.org/amazonec2",
-  "S3 Bucket": "https://cdn.simpleicons.org/amazons3",
+  // Self-hosted: Simple Icons removed all Amazon brands from their CDN (404),
+  // so these are pinned locally under public/icons (white fill for dark tiles).
+  AWS: "/icons/aws.svg",
+  EC2: "/icons/ec2.svg",
+  "S3 Bucket": "/icons/s3.svg",
   Cloudinary: "https://cdn.simpleicons.org/cloudinary",
   Docker: "https://cdn.simpleicons.org/docker",
   Nginx: "https://cdn.simpleicons.org/nginx",
@@ -55,6 +58,25 @@ const brandIcon: Record<string, string> = {
   Postman: "https://cdn.simpleicons.org/postman",
   Swagger: "https://cdn.simpleicons.org/swagger",
   Figma: "https://cdn.simpleicons.org/figma",
+}
+
+// Logo with graceful degradation: if a CDN/local logo 404s, show Lucide/initials instead of an empty box
+function SkillTileIcon({ skill, src, Fallback }: { skill: string; src?: string; Fallback?: React.ElementType }) {
+  const [failed, setFailed] = useState(false)
+  if (src && !failed) {
+    return (
+      <img
+        src={src}
+        alt={`${skill} logo`}
+        loading="lazy"
+        decoding="async"
+        className="w-6 h-6 object-contain"
+        onError={() => setFailed(true)}
+      />
+    )
+  }
+  if (Fallback) return <Fallback className="w-6 h-6 text-white/85" />
+  return <span className="font-space font-bold text-[11px] text-white/85">{skill.slice(0, 2).toUpperCase()}</span>
 }
 
 // Conceptual topics with no brand logo -> meaningful Lucide fallback
@@ -132,15 +154,7 @@ export default function Skills() {
                         >
                           <span className={`absolute inset-x-6 top-0 h-px bg-gradient-to-r ${category.color} opacity-0 group-hover/tile:opacity-100 transition-opacity`} />
                           <span className="w-12 h-12 rounded-xl bg-white/[0.06] border border-white/10 grid place-items-center shadow-inner group-hover/tile:scale-110 transition-transform duration-300">
-                            {src ? (
-                              <img src={src} alt={`${skill} logo`} loading="lazy" className="w-6 h-6 object-contain" />
-                            ) : Fallback ? (
-                              <Fallback className="w-6 h-6 text-white/85" />
-                            ) : (
-                              <span className="font-space font-bold text-[11px] text-white/85">
-                                {skill.slice(0, 2).toUpperCase()}
-                              </span>
-                            )}
+                            <SkillTileIcon skill={skill} src={src} Fallback={Fallback} />
                           </span>
                           <span className="text-[11px] leading-tight font-medium text-white/75 group-hover/tile:text-white text-center w-full">
                             {skill}
