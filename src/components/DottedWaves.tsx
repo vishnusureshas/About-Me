@@ -28,17 +28,18 @@ function DottedLine({ d, color, glow, width = 1440 }: { d: string; color: string
 }
 
 export default function DottedWaves({ className = "" }: { className?: string }) {
+  // Light-mode tuned palette: deeper hues, softer opacity for contrast on airy backgrounds
   const waves = [
-    { y: 120, amp: 46, c1: "#00d4ff", g1: "rgba(0,212,255,0.8)", o: 0.9, w: 1 },
-    { y: 210, amp: 62, c1: "#7b2ff7", g1: "rgba(123,47,247,0.8)", o: 0.7, w: 2 },
-    { y: 300, amp: 40, c1: "#ff4a95", g1: "rgba(255,74,149,0.8)", o: 0.75, w: 1.5 },
-    { y: 390, amp: 58, c1: "#00ffb2", g1: "rgba(0,255,178,0.7)", o: 0.55, w: 2.4 },
-    { y: 480, amp: 44, c1: "#00d4ff", g1: "rgba(0,212,255,0.7)", o: 0.5, w: 3 },
+    { y: 120, amp: 46, c1: "#0891b2", g1: "rgba(6,182,214,0.35)", o: 0.55, w: 1 },
+    { y: 210, amp: 62, c1: "#7c3aed", g1: "rgba(124,58,237,0.32)", o: 0.45, w: 2 },
+    { y: 300, amp: 40, c1: "#db2777", g1: "rgba(219,39,119,0.30)", o: 0.45, w: 1.5 },
+    { y: 390, amp: 58, c1: "#059669", g1: "rgba(5,150,105,0.28)", o: 0.35, w: 2.4 },
+    { y: 480, amp: 44, c1: "#0284c7", g1: "rgba(2,132,199,0.28)", o: 0.32, w: 3 },
   ]
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
       <div className="dotted-wave-wrap absolute inset-0">
-        <svg viewBox="0 0 1440 600" preserveAspectRatio="none" className="h-full w-full opacity-60">
+        <svg viewBox="0 0 1440 600" preserveAspectRatio="none" className="h-full w-full opacity-50">
           {waves.map((w, i) => (
             <g key={i} opacity={w.o}>
               <DottedLine d={wavePath(w.y, w.amp, 1440, w.w)} color={w.c1} glow={w.g1} />

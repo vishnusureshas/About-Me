@@ -62,7 +62,7 @@ export default function Preloader() {
       {visible && (
         <motion.div
           key="preloader"
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#05070f]"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#f2f6ff]"
           exit={{ opacity: 0, scale: 1.05, filter: "blur(12px)" }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           role="status"
@@ -70,8 +70,8 @@ export default function Preloader() {
           aria-label="Loading portfolio"
         >
           <DottedWaves className="opacity-60" />
-          <div className="absolute left-1/2 top-[-12%] h-[300px] w-[680px] -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500/15 via-violet-600/15 to-pink-500/15 blur-[80px]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#05070f] via-transparent to-[#05070f]/70" />
+          <div className="absolute left-1/2 top-[-12%] h-[300px] w-[680px] -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-400/25 via-violet-400/22 to-pink-400/20 blur-[80px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#f2f6ff] via-transparent to-[#f2f6ff]/70" />
 
           <div className="relative flex flex-col items-center px-6 text-center">
             {/* monogram */}
@@ -79,9 +79,9 @@ export default function Preloader() {
               <div className="absolute -inset-[3px] overflow-hidden rounded-[1.7rem]">
                 <div className="absolute inset-[-60%] animate-[border-spin_1.6s_linear_infinite] bg-[conic-gradient(from_0deg,transparent,rgba(0,212,255,0.9),transparent,rgba(255,74,149,0.8),transparent)]" />
               </div>
-              <div className="absolute inset-0 grid place-items-center rounded-[1.55rem] border border-white/10 bg-[#0a0f1e] shadow-[0_0_50px_rgba(0,212,255,0.15)]">
+              <div className="absolute inset-0 grid place-items-center rounded-[1.55rem] border border-slate-200 bg-white shadow-[0_0_44px_rgba(6,182,214,0.18)]">
                 <motion.span
-                  className="font-space text-3xl font-bold text-white"
+                  className="font-space text-3xl font-bold text-slate-900"
                   animate={{ opacity: [1, 0.6, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -100,7 +100,7 @@ export default function Preloader() {
             </div>
 
             {/* staggered name */}
-            <div className="mt-7 flex overflow-hidden font-space text-sm font-bold tracking-[0.3em] text-white sm:text-base" aria-label={NAME}>
+            <div className="mt-7 flex overflow-hidden font-space text-sm font-bold tracking-[0.3em] text-slate-900 sm:text-base" aria-label={NAME}>
               {NAME.split("").map((ch, i) => (
                 <motion.span
                   key={i}
@@ -117,7 +117,7 @@ export default function Preloader() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="mt-2 font-jetbrains text-[11px] uppercase tracking-[0.32em] text-cyan-300/80"
+              className="mt-2 font-jetbrains text-[11px] uppercase tracking-[0.32em] text-cyan-700"
             >
               {ROLE}
             </motion.p>
@@ -128,12 +128,12 @@ export default function Preloader() {
                 <span className="font-jetbrains text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                   {progress < 100 ? "Preparing experience" : "Ready"}
                 </span>
-                <span className="font-space text-2xl font-bold tabular-nums text-white">
+                <span className="font-space text-2xl font-bold tabular-nums text-slate-900">
                   {progress}
                   <span className="text-sm text-muted-foreground">%</span>
                 </span>
               </div>
-              <div className="relative mt-2 h-[6px] overflow-hidden rounded-full border border-white/10 bg-white/[0.06]">
+              <div className="relative mt-2 h-[6px] overflow-hidden rounded-full border border-slate-200 bg-slate-200/60">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500 shadow-[0_0_16px_rgba(0,212,255,0.7)] transition-[width] duration-150"
                   style={{ width: `${progress}%` }}
@@ -151,13 +151,13 @@ export default function Preloader() {
                       <span
                         className={`grid h-5 w-5 place-items-center rounded-full border transition-all duration-300 ${
                           done
-                            ? "border-emerald-300/50 bg-emerald-400/15 text-emerald-300"
-                            : "border-white/15 bg-white/[0.03] text-transparent"
+                            ? "border-emerald-500/40 bg-emerald-500/12 text-emerald-600"
+                            : "border-slate-300 bg-white text-transparent"
                         }`}
                       >
-                        {done ? <Check className="h-3 w-3" /> : active ? <Loader2 className="h-3 w-3 animate-spin text-cyan-300" /> : null}
+                        {done ? <Check className="h-3 w-3" /> : active ? <Loader2 className="h-3 w-3 animate-spin text-cyan-600" /> : null}
                       </span>
-                      <span className={done ? "text-white/85" : active ? "text-white/60" : "text-muted-foreground/50"}>
+                      <span className={done ? "text-slate-800" : active ? "text-slate-600" : "text-muted-foreground/70"}>
                         {label}
                       </span>
                     </li>
@@ -168,7 +168,7 @@ export default function Preloader() {
 
             <button
               onClick={finish}
-              className="mt-7 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 font-jetbrains text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-cyan-300/30 hover:text-white focus-ring"
+              className="mt-7 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 font-jetbrains text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-cyan-500/40 hover:text-slate-900 focus-ring shadow-sm"
             >
               <FastForward className="h-3.5 w-3.5" /> Skip intro
             </button>

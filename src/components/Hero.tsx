@@ -102,10 +102,10 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className="relative min-h-[100dvh] flex items-center overflow-hidden bg-[#05070f]">
-      {/* depth + dotted wavy lines cyan/magenta */}
+    <section id="hero" className="relative min-h-[100dvh] flex items-center overflow-hidden bg-transparent section-light">
+      {/* light depth + dotted wavy lines */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#05070f] via-[#070b18] to-[#05070f]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/20 to-transparent" />
         <DottedWaves className="opacity-70" />
         <div className="aurora aurora-cyan top-[-14%] left-[-12%]" style={{ animation: "aurora 16s ease-in-out infinite" }} />
         <div className="aurora aurora-violet top-[8%] right-[-16%]" style={{ animation: "aurora 18s ease-in-out infinite reverse" }} />
@@ -113,8 +113,8 @@ export default function Hero() {
         <div className="absolute inset-0 vignette pointer-events-none" />
       </div>
 
-      {/* monitor glow frame hint */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-7xl h-[86%] rounded-[2.5rem] border border-white/[0.06] shadow-[0_0_120px_rgba(0,212,255,0.08),inset_0_0_80px_rgba(123,47,247,0.05)] pointer-events-none hidden md:block" />
+      {/* futuristic light frame hint */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-7xl h-[86%] rounded-[2.5rem] border border-slate-900/[0.06] bg-white/40 shadow-[0_0_100px_rgba(6,182,214,0.10),inset_0_0_70px_rgba(124,58,237,0.05)] pointer-events-none hidden md:block" />
 
       <div className="container mx-auto px-6 pt-28 pb-14 md:pt-36 md:pb-20 relative z-10">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center max-w-7xl mx-auto">
@@ -126,21 +126,21 @@ export default function Hero() {
             className="relative order-1"
           >
             <div className="relative mx-auto w-full max-w-[440px]">
-              <div className="absolute -inset-5 bg-gradient-to-br from-cyan-500/20 via-violet-500/15 to-pink-500/15 rounded-[2.4rem] blur-2xl -z-10" />
-              <div className="absolute -inset-[1.5px] rounded-[1.8rem] -z-10 overflow-hidden opacity-80">
-                <div className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent,rgba(0,212,255,0.5),transparent,rgba(255,74,149,0.4),transparent)] animate-[border-spin_6s_linear_infinite]" />
+              <div className="absolute -inset-5 bg-gradient-to-br from-cyan-400/25 via-violet-400/20 to-pink-400/20 rounded-[2.4rem] blur-2xl -z-10" />
+              <div className="absolute -inset-[1.5px] rounded-[1.8rem] -z-10 overflow-hidden opacity-70">
+                <div className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent,rgba(6,182,214,0.55),transparent,rgba(236,72,153,0.45),transparent)] animate-[border-spin_6s_linear_infinite]" />
               </div>
 
               <div className="relative rounded-[1.8rem] opaque-glass protrude overflow-hidden p-3">
-                <div className="relative rounded-[1.2rem] overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10">
+                <div className="relative rounded-[1.2rem] overflow-hidden bg-gradient-to-br from-slate-100 to-white border border-slate-200">
                   <div className="relative aspect-[4/4.4]">
                     <img src="/profile.jpeg" alt={personalInfo.name} className="w-full h-full object-cover" loading="eager" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-cyan-500/10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/15 to-cyan-500/10" />
                     <div className="absolute inset-x-0 bottom-0 p-4 pt-10">
-                      <p className="font-space text-lg font-bold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{personalInfo.name}</p>
-                      <p className="mt-0.5 text-[13px] font-semibold text-cyan-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{personalInfo.title}</p>
-                      <p className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-2.5 py-1 font-jetbrains text-[11px] text-white/75 backdrop-blur-md">
-                        <MapPin className="h-3 w-3 text-pink-300" /> Calicut, Kerala
+                      <p className="font-space text-lg font-bold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">{personalInfo.name}</p>
+                      <p className="mt-0.5 text-[13px] font-semibold text-cyan-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">{personalInfo.title}</p>
+                      <p className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-slate-900/55 px-2.5 py-1 font-jetbrains text-[11px] text-white/85 backdrop-blur-md">
+                        <MapPin className="h-3 w-3 text-pink-200" /> Calicut, Kerala
                       </p>
                     </div>
                   </div>
@@ -148,11 +148,11 @@ export default function Hero() {
               </div>
 
               <motion.div
-                className="absolute -bottom-4 left-1/2 -translate-x-1/2 hidden sm:flex items-center gap-2 px-4 py-2 rounded-full glass-strong border border-white/10 text-xs whitespace-nowrap"
+                className="absolute -bottom-4 left-1/2 -translate-x-1/2 hidden sm:flex items-center gap-2 px-4 py-2 rounded-full glass-strong border border-slate-200 text-xs whitespace-nowrap shadow-lg"
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
+                <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
                 <span className="font-jetbrains text-muted-foreground">React • Node • Postgres • AWS</span>
               </motion.div>
             </div>
@@ -177,7 +177,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.14 }}
-              className="font-jetbrains text-[13px] tracking-[0.22em] uppercase text-cyan-300/90 min-h-[20px]"
+              className="font-jetbrains text-[13px] tracking-[0.22em] uppercase text-cyan-700 min-h-[20px]"
               aria-label={GREETING}
             >
               <span aria-hidden="true">
@@ -194,7 +194,7 @@ export default function Hero() {
               className="font-space font-bold tracking-[-0.032em] leading-[0.95] text-balance mt-2"
               aria-label={`${GREETING} ${FULL_NAME}, ${FULL_ROLE}`}
             >
-              <span aria-hidden="true" className="block text-5xl sm:text-6xl md:text-[4.6rem] drop-shadow-[0_8px_32px_rgba(0,212,255,0.15)] min-h-[1.1em]">
+              <span aria-hidden="true" className="block text-5xl sm:text-6xl md:text-[4.6rem] drop-shadow-[0_8px_28px_rgba(6,182,214,0.18)] min-h-[1.1em]">
                 {(() => {
                   const cut = name.indexOf(" ")
                   const first = cut === -1 ? name : name.slice(0, cut)
@@ -202,16 +202,16 @@ export default function Hero() {
                   const typingName = name.length > 0 && name.length < FULL_NAME.length
                   return (
                     <>
-                      <span className="text-white">{first}</span>
+                      <span className="text-slate-900">{first}</span>
                       {rest ? <span className="gradient-text"> {rest}</span> : name ? " " : null}
                       {typingName && (
-                        <span className="ml-1 inline-block w-[3px] h-[0.9em] translate-y-[0.08em] bg-gradient-to-b from-cyan-300 to-violet-400 animate-pulse shadow-[0_0_14px_rgba(0,212,255,0.9)]" />
+                        <span className="ml-1 inline-block w-[3px] h-[0.9em] translate-y-[0.08em] bg-gradient-to-b from-cyan-500 to-violet-500 animate-pulse shadow-[0_0_14px_rgba(6,182,214,0.6)]" />
                       )}
                     </>
                   )
                 })()}
               </span>
-              <span aria-hidden="true" className="block mt-3 text-xl sm:text-2xl font-medium tracking-tight text-white/90 min-h-[1.6em]">
+              <span aria-hidden="true" className="block mt-3 text-xl sm:text-2xl font-medium tracking-tight text-slate-700 min-h-[1.6em]">
                 {role}
                 {!done && name.length === FULL_NAME.length && (
                   <span className="ml-1 inline-block w-[2px] h-[1.1em] translate-y-[3px] bg-white/80 animate-pulse" />
@@ -243,7 +243,7 @@ export default function Hero() {
               </a>
               <button
                 onClick={downloadCV}
-                className="neon-btn neon-btn-secondary inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white/[0.04] backdrop-blur text-white font-medium focus-ring"
+                className="neon-btn neon-btn-secondary inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white backdrop-blur text-slate-900 font-medium focus-ring"
               >
                 <Download className="w-4 h-4" /> Download CV
               </button>
@@ -260,20 +260,20 @@ export default function Hero() {
                 className="group flex items-center gap-3 px-4 py-3 rounded-2xl glass hover:border-cyan-400/25 transition-colors text-left flex-1 sm:flex-initial focus-ring premium-ring"
                 aria-label="Copy email"
               >
-                <span className="w-9 h-9 rounded-xl bg-cyan-400/15 grid place-items-center flex-shrink-0 group-hover:bg-cyan-400/25 transition-colors">
-                  <Mail className="w-4 h-4 text-cyan-300" />
+                <span className="w-9 h-9 rounded-xl bg-cyan-500/12 grid place-items-center flex-shrink-0 group-hover:bg-cyan-500/20 transition-colors">
+                  <Mail className="w-4 h-4 text-cyan-700" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[10px] font-jetbrains tracking-[0.14em] uppercase text-muted-foreground">Email</span>
                   <span className="block text-sm font-medium text-foreground truncate">{personalInfo.email}</span>
                 </span>
-                <span className="ml-auto w-7 h-7 rounded-full bg-white text-zinc-900 grid place-items-center flex-shrink-0">
+                <span className="ml-auto w-7 h-7 rounded-full bg-slate-900 text-white grid place-items-center flex-shrink-0">
                   {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 </span>
               </button>
               <div className="flex items-center gap-3 px-4 py-3 rounded-2xl glass flex-1 sm:flex-initial premium-ring">
-                <span className="w-9 h-9 rounded-xl bg-violet-500/15 grid place-items-center flex-shrink-0">
-                  <MapPin className="w-4 h-4 text-violet-300" />
+                <span className="w-9 h-9 rounded-xl bg-violet-500/12 grid place-items-center flex-shrink-0">
+                  <MapPin className="w-4 h-4 text-violet-700" />
                 </span>
                 <span>
                   <span className="block text-[10px] font-jetbrains tracking-[0.14em] uppercase text-muted-foreground">Based in</span>

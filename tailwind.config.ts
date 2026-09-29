@@ -62,8 +62,8 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        premium: "0 0 0 1px rgba(255,255,255,0.06), 0 20px 60px rgba(0,0,0,0.45), 0 0 40px rgba(0,212,255,0.12)",
-        soft: "0 8px 32px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.06)",
+        premium: "0 0 0 1px rgba(15,23,42,0.06), 0 20px 55px rgba(15,23,42,0.10), 0 0 36px rgba(6,182,214,0.10)",
+        soft: "0 8px 28px rgba(15,23,42,0.08), inset 0 1px 0 rgba(255,255,255,0.9)",
       },
       animation: {
         float: "float 6s ease-in-out infinite",

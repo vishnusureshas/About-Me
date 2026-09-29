@@ -12,11 +12,11 @@ import Preloader from "@/components/Preloader"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-clip bg-[#05070f]">
+    <main className="relative min-h-screen overflow-clip bg-transparent">
       <Preloader />
       <Navbar />
       <Hero />
-      <div className="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
+      <div className="h-px max-w-6xl mx-auto hairline-light opacity-80" />
       <About />
       <Experience />
       <Skills />
