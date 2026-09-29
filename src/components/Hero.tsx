@@ -134,7 +134,7 @@ export default function Hero() {
               <div className="relative rounded-[1.8rem] opaque-glass protrude overflow-hidden p-3">
                 <div className="relative rounded-[1.2rem] overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10">
                   <div className="relative aspect-[4/4.4]">
-                    <img src="/profile.jpeg" alt={personalInfo.name} className="w-full h-full object-cover" loading="eager" />
+                    <img src="/profile.jpeg" alt={personalInfo.name} className="w-full h-full object-cover" loading="eager" decoding="async" />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-cyan-500/10" />
                     <div className="absolute inset-x-0 bottom-0 p-4 pt-10">
                       <p className="font-space text-lg font-bold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{personalInfo.name}</p>

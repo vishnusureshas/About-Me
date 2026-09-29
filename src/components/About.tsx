@@ -45,7 +45,7 @@ export default function About() {
               <div className="relative flex-shrink-0 mx-auto sm:mx-0">
                 <div className="absolute -inset-2 rounded-[1.6rem] bg-gradient-to-br from-cyan-400/40 via-violet-500/30 to-pink-500/30 blur-lg opacity-60" />
                 <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-[1.4rem] overflow-hidden border border-white/20">
-                  <img src="/profile.jpeg" alt={personalInfo.name} className="w-full h-full object-cover" loading="lazy" />
+                  <img src="/profile.jpeg" alt={personalInfo.name} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
                 <span className="absolute -bottom-1.5 -right-1.5 flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-400 text-emerald-950 text-[10px] font-bold border-2 border-[#12131a] shadow-[0_0_16px_rgba(16,185,129,0.9)]">

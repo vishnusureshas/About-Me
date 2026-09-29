@@ -38,9 +38,9 @@ export default function DottedWaves({ className = "" }: { className?: string }) 
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
       <div className="dotted-wave-wrap absolute inset-0">
-        <svg viewBox="0 0 1440 600" preserveAspectRatio="none" className="h-full w-full opacity-60">
+        <svg viewBox="0 0 1440 600" preserveAspectRatio="none" className="h-full w-full opacity-60" focusable="false">
           {waves.map((w, i) => (
-            <g key={i} opacity={w.o}>
+            <g key={i} opacity={w.o} className="dot-wave">
               <DottedLine d={wavePath(w.y, w.amp, 1440, w.w)} color={w.c1} glow={w.g1} />
               <DottedLine d={wavePath(w.y + 26, w.amp * 0.9, 1440, w.w)} color={w.c1} glow={w.g1} />
             </g>
