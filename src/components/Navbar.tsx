@@ -61,8 +61,8 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-white/80 backdrop-blur-xl border-b border-slate-900/[0.07] shadow-[0_8px_32px_rgba(15,23,42,0.08),0_0_24px_rgba(6,182,214,0.08)]"
-            : "bg-gradient-to-b from-white/70 to-transparent border-b border-transparent"
+            ? "bg-[#080b14]/85 backdrop-blur-xl border-b border-white/[0.07] shadow-[0_8px_40px_rgba(0,0,0,0.5),0_0_30px_rgba(0,212,255,0.06)]"
+            : "bg-gradient-to-b from-[#080b14]/70 to-transparent border-b border-transparent"
         }`}
       >
         {/* neon hairline */}
@@ -74,7 +74,7 @@ export default function Navbar() {
               V
             </span>
             <span className="text-left leading-none">
-              <span className="block font-space font-semibold tracking-tight text-[15px] text-slate-900">
+              <span className="block font-space font-semibold tracking-tight text-[15px] text-white">
                 {personalInfo.name.split(" ")[0]} <span className="gradient-text">{personalInfo.name.split(" ").slice(1).join(" ")}</span>
               </span>
               <span className="block text-[10px] font-jetbrains tracking-[0.2em] uppercase text-muted-foreground mt-0.5">
@@ -94,7 +94,7 @@ export default function Navbar() {
                   onClick={() => scrollTo(id)}
                   data-active={isActive}
                   className={`nav-neon text-[13.5px] font-medium tracking-wide pb-1 transition-colors focus-ring rounded ${
-                    isActive ? "text-slate-900" : "text-muted-foreground hover:text-slate-900"
+                    isActive ? "text-white" : "text-muted-foreground hover:text-white"
                   }`}
                 >
                   {link.name}
@@ -110,13 +110,13 @@ export default function Navbar() {
                 e.preventDefault()
                 scrollTo("contact")
               }}
-              className="neon-btn hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white text-slate-900 text-[13px] font-medium hover:bg-slate-50 transition-all focus-ring"
+              className="neon-btn hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500/15 to-violet-500/15 text-white text-[13px] font-medium hover:from-cyan-500/25 hover:to-violet-500/25 transition-all focus-ring"
             >
               Let&apos;s talk <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
             <button
               type="button"
-              className="lg:hidden w-10 h-10 rounded-xl bg-white border border-slate-200 grid place-items-center text-foreground hover:bg-slate-50 transition-colors focus-ring shadow-sm"
+              className="lg:hidden w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.08] grid place-items-center text-foreground hover:bg-white/[0.1] transition-colors focus-ring"
               onClick={() => setIsMobileMenuOpen((v) => !v)}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
@@ -136,7 +136,7 @@ export default function Navbar() {
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -12, opacity: 0, scale: 0.98 }}
               transition={{ type: "spring", damping: 24, stiffness: 220 }}
-              className="absolute top-[80px] left-4 right-4 rounded-[24px] glass-strong p-6 shadow-[0_20px_55px_rgba(15,23,42,0.14)] border border-slate-200 overflow-hidden"
+              className="absolute top-[80px] left-4 right-4 rounded-[24px] glass-strong p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden"
             >
               <div className="absolute -top-24 -right-24 w-72 h-72 bg-primary/10 rounded-full blur-[50px] pointer-events-none" />
               <div className="flex flex-col gap-1 relative">
@@ -148,7 +148,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.04 }}
                     className={`text-left px-4 py-3 rounded-xl text-[15px] font-medium flex items-center justify-between group focus-ring ${
-                      active === link.href.slice(1) ? "bg-slate-900 text-white" : "hover:bg-slate-100 text-foreground"
+                      active === link.href.slice(1) ? "bg-foreground text-background" : "hover:bg-white/[0.06] text-foreground"
                     }`}
                   >
                     {link.name}

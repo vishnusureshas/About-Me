@@ -11,7 +11,7 @@ const API_URL = RAW_API_URL.replace(/\/+$/, "")
 type FormStatus = "idle" | "loading" | "success" | "error"
 
 const inputCls =
-  "w-full px-4 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-900 placeholder:text-muted-foreground/60 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/15 focus:bg-white transition-all text-sm shadow-sm"
+  "w-full px-4 py-3.5 rounded-2xl bg-[#0a0f1e]/80 border border-white/10 text-white placeholder:text-muted-foreground/50 focus:outline-none focus:border-cyan-300/50 focus:ring-2 focus:ring-cyan-400/20 focus:bg-[#0b1226] transition-all text-sm shadow-inner"
 
 export default function Contact() {
   const [name, setName] = useState("")
@@ -98,9 +98,9 @@ export default function Contact() {
   }
 
   return (
-    <section className="relative py-20 sm:py-28 bg-transparent section-light overflow-hidden" id="contact">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[760px] h-[300px] bg-gradient-to-r from-cyan-400/20 via-violet-400/20 to-pink-400/18 blur-[80px] rounded-full pointer-events-none" />
-      <div className="absolute inset-0 animated-grid opacity-60 pointer-events-none" />
+    <section className="relative py-20 sm:py-28 bg-[#05070f] overflow-hidden" id="contact">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[760px] h-[300px] bg-gradient-to-r from-cyan-500/10 via-violet-600/10 to-pink-500/10 blur-[80px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 animated-grid opacity-20 pointer-events-none" />
 
       <div className="container mx-auto px-6 relative">
         <SectionHeading
@@ -119,59 +119,59 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="opaque-glass protrude relative rounded-[30px] overflow-hidden p-7 sm:p-9 flex flex-col"
           >
-            <div className="absolute inset-x-12 top-0 h-[2px] bg-gradient-to-r from-cyan-500 via-violet-500 to-pink-500 opacity-80" />
-            <div className="absolute -top-24 -right-24 w-72 h-72 bg-cyan-400/20 blur-[70px] rounded-full pointer-events-none" />
-            <div className="absolute -bottom-24 -left-16 w-72 h-72 bg-violet-400/20 blur-[70px] rounded-full pointer-events-none" />
+            <div className="absolute inset-x-12 top-0 h-[2px] bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500 opacity-80" />
+            <div className="absolute -top-24 -right-24 w-72 h-72 bg-cyan-500/12 blur-[70px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-24 -left-16 w-72 h-72 bg-violet-600/12 blur-[70px] rounded-full pointer-events-none" />
 
             <div className="relative flex items-center gap-3">
-              <span className="w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-500 to-violet-600 grid place-items-center border border-white/40 shadow-[0_10px_24px_rgba(6,182,214,0.28)]">
+              <span className="w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-400 to-violet-600 grid place-items-center border border-white/20 shadow-[0_10px_28px_rgba(0,212,255,0.3)]">
                 <Mail className="w-5 h-5 text-white" />
               </span>
               <div>
-                <h3 className="font-space font-bold text-xl tracking-tight text-slate-900">Contact information</h3>
+                <h3 className="font-space font-bold text-xl tracking-tight text-white">Contact information</h3>
                 <p className="text-sm text-muted-foreground">Responsive • Remote-friendly • Open to work</p>
               </div>
             </div>
 
             <div className="relative mt-7 space-y-3.5">
-              <a href={`mailto:${personalInfo.email}`} className="group flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-200 hover:border-cyan-500/30 hover:shadow-[0_8px_28px_rgba(6,182,214,0.16)] transition-all focus-ring shadow-sm">
-                <span className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <Mail className="w-5 h-5 text-cyan-700" />
+              <a href={`mailto:${personalInfo.email}`} className="group flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/10 hover:border-cyan-300/30 hover:shadow-[0_0_28px_rgba(0,212,255,0.18)] transition-all focus-ring">
+                <span className="w-12 h-12 rounded-xl bg-cyan-400/15 border border-cyan-300/20 grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                  <Mail className="w-5 h-5 text-cyan-200" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[11px] font-jetbrains tracking-[0.16em] uppercase text-muted-foreground">Email me at</span>
-                  <span className="block text-[14px] font-semibold text-slate-900 break-all">{personalInfo.email}</span>
+                  <span className="block text-[14px] font-semibold text-white break-all">{personalInfo.email}</span>
                 </span>
               </a>
 
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                <span className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 grid place-items-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-violet-700" />
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                <span className="w-12 h-12 rounded-xl bg-violet-500/15 border border-violet-400/20 grid place-items-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-violet-200" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[11px] font-jetbrains tracking-[0.16em] uppercase text-muted-foreground">Based in</span>
-                  <span className="block text-[14px] font-semibold text-slate-900">{personalInfo.location}</span>
+                  <span className="block text-[14px] font-semibold text-white">{personalInfo.location}</span>
                 </span>
-                <span className="ml-auto hidden sm:inline-flex items-center gap-1.5 text-[11px] font-jetbrains px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-700">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> IST
+                <span className="ml-auto hidden sm:inline-flex items-center gap-1.5 text-[11px] font-jetbrains px-2.5 py-1 rounded-full bg-emerald-400/10 border border-emerald-300/20 text-emerald-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" /> IST
                 </span>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm">
-                  <Clock3 className="w-4 h-4 mx-auto text-cyan-600" />
-                  <p className="mt-1.5 text-xs font-semibold text-slate-900">24h reply</p>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 text-center">
+                  <Clock3 className="w-4 h-4 mx-auto text-cyan-300" />
+                  <p className="mt-1.5 text-xs font-semibold text-white">24h reply</p>
                   <p className="text-[11px] text-muted-foreground">Fast response</p>
                 </div>
-                <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm">
-                  <ShieldCheck className="w-4 h-4 mx-auto text-emerald-600" />
-                  <p className="mt-1.5 text-xs font-semibold text-slate-900">No spam</p>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 text-center">
+                  <ShieldCheck className="w-4 h-4 mx-auto text-emerald-300" />
+                  <p className="mt-1.5 text-xs font-semibold text-white">No spam</p>
                   <p className="text-[11px] text-muted-foreground">Respect inbox</p>
                 </div>
               </div>
             </div>
 
-            <div className="relative mt-7 pt-6 border-t border-slate-200">
+            <div className="relative mt-7 pt-6 border-t border-white/[0.08]">
               <p className="text-[11px] font-jetbrains tracking-[0.2em] uppercase text-muted-foreground mb-3">Connect elsewhere</p>
               <div className="flex gap-2.5">
                 {[
@@ -180,7 +180,7 @@ export default function Contact() {
                   { icon: Code2, link: personalInfo.social.leetcode, label: "LeetCode" },
                 ].map(({ icon: Icon, link, label }) => (
                   <a key={label} href={link} target="_blank" rel="noopener noreferrer" aria-label={label} className="illum-tile w-12 h-12 rounded-2xl grid place-items-center focus-ring">
-                    <Icon className="w-5 h-5 text-slate-800" />
+                    <Icon className="w-5 h-5 text-white" />
                   </a>
                 ))}
               </div>
@@ -194,15 +194,15 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="opaque-glass protrude rounded-[30px] p-6 sm:p-9 relative overflow-hidden"
           >
-            <div className="absolute inset-x-12 top-0 h-[2px] bg-gradient-to-r from-pink-500 via-violet-500 to-cyan-500 opacity-80" />
-            <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-fuchsia-400/20 blur-[70px] rounded-full pointer-events-none" />
+            <div className="absolute inset-x-12 top-0 h-[2px] bg-gradient-to-r from-pink-500 via-violet-500 to-cyan-400 opacity-80" />
+            <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-fuchsia-600/10 blur-[70px] rounded-full pointer-events-none" />
             <div className="relative flex items-start justify-between gap-4 mb-6">
               <div>
-                <h3 className="font-space font-bold text-xl tracking-tight text-slate-900">Send a message</h3>
+                <h3 className="font-space font-bold text-xl tracking-tight text-white">Send a message</h3>
                 <p className="text-sm text-muted-foreground mt-1">Tell me about your project, timeline and goals.</p>
               </div>
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-xs font-jetbrains text-emerald-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Secure
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-300/20 text-xs font-jetbrains text-emerald-200">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" /> Secure
               </span>
             </div>
 
@@ -275,10 +275,10 @@ export default function Contact() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-md cursor-default"
+              className="absolute inset-0 bg-[#04060d]/80 backdrop-blur-md cursor-default"
             />
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[380px] bg-gradient-to-r from-cyan-400/25 via-violet-400/25 to-pink-400/25 blur-[90px] rounded-full" />
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[380px] bg-gradient-to-r from-cyan-500/20 via-violet-600/20 to-pink-500/20 blur-[90px] rounded-full" />
             </div>
 
             {/* Card */}
@@ -287,7 +287,7 @@ export default function Contact() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 16 }}
               transition={{ type: "spring", stiffness: 320, damping: 26 }}
-              className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-slate-200 bg-white/95 shadow-[0_32px_80px_rgba(15,23,42,0.20),0_0_50px_rgba(6,182,214,0.12)] backdrop-blur-xl"
+              className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-white/12 bg-[#0a0f1e]/95 shadow-[0_32px_100px_rgba(0,0,0,0.6),0_0_60px_rgba(0,212,255,0.12)] backdrop-blur-xl"
             >
               <div className="absolute inset-x-10 top-0 h-[3px] rounded-full bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500" />
               <div className="absolute -top-20 -left-20 w-56 h-56 bg-cyan-500/15 blur-[60px] rounded-full pointer-events-none" />
@@ -320,7 +320,7 @@ export default function Contact() {
                 type="button"
                 onClick={closeSuccessModal}
                 aria-label="Close"
-                className="absolute top-4 right-4 z-10 p-2 rounded-xl bg-slate-100 border border-slate-200 text-muted-foreground hover:text-slate-900 hover:bg-slate-200 transition-all focus-ring"
+                className="absolute top-4 right-4 z-10 p-2 rounded-xl bg-white/5 border border-white/10 text-muted-foreground hover:text-white hover:bg-white/10 hover:border-white/20 transition-all focus-ring"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -363,19 +363,19 @@ export default function Contact() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.45 }}
                 >
-                  <p className="mt-6 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[11px] font-jetbrains tracking-[0.18em] uppercase text-emerald-700">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <p className="mt-6 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-300/25 text-[11px] font-jetbrains tracking-[0.18em] uppercase text-emerald-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
                     Delivered successfully
                   </p>
-                  <h3 id="contact-success-title" className="mt-4 font-space font-bold text-2xl sm:text-[26px] tracking-tight text-slate-900 leading-tight">
+                  <h3 id="contact-success-title" className="mt-4 font-space font-bold text-2xl sm:text-[26px] tracking-tight text-white leading-tight">
                     Thank you{sentName ? `, ${sentName}` : ""}!{" "}
-                    <span className="bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-cyan-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
                       Message sent.
                     </span>
                   </h3>
                   <p id="contact-success-desc" className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
                     Your message has landed safely in my inbox. I&apos;ll read it carefully
-                    and reply within <span className="text-slate-900 font-semibold">24 hours</span>.
+                    and reply within <span className="text-white font-semibold">24 hours</span>.
                   </p>
                 </motion.div>
 
@@ -385,21 +385,21 @@ export default function Contact() {
                   transition={{ delay: 0.32, duration: 0.4 }}
                   className="mt-5 grid grid-cols-2 gap-2.5 text-left"
                 >
-                  <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                    <span className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 grid place-items-center flex-shrink-0">
-                      <Clock3 className="w-4 h-4 text-cyan-700" />
+                  <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
+                    <span className="w-9 h-9 rounded-xl bg-cyan-400/15 border border-cyan-300/20 grid place-items-center flex-shrink-0">
+                      <Clock3 className="w-4 h-4 text-cyan-200" />
                     </span>
                     <span>
-                      <span className="block text-xs font-semibold text-slate-900">24h reply</span>
+                      <span className="block text-xs font-semibold text-white">24h reply</span>
                       <span className="block text-[11px] text-muted-foreground">Fast response</span>
                     </span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                    <span className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 grid place-items-center flex-shrink-0">
-                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
+                    <span className="w-9 h-9 rounded-xl bg-emerald-400/15 border border-emerald-300/20 grid place-items-center flex-shrink-0">
+                      <ShieldCheck className="w-4 h-4 text-emerald-200" />
                     </span>
                     <span>
-                      <span className="block text-xs font-semibold text-slate-900">Private</span>
+                      <span className="block text-xs font-semibold text-white">Private</span>
                       <span className="block text-[11px] text-muted-foreground">No spam, ever</span>
                     </span>
                   </div>
@@ -422,7 +422,7 @@ export default function Contact() {
                   <button
                     type="button"
                     onClick={closeSuccessModal}
-                    className="px-6 py-3.5 rounded-full text-sm font-semibold text-muted-foreground hover:text-slate-900 bg-slate-100 border border-slate-200 hover:border-slate-300 hover:bg-slate-200 transition-all focus-ring"
+                    className="px-6 py-3.5 rounded-full text-sm font-semibold text-muted-foreground hover:text-white bg-white/[0.04] border border-white/10 hover:border-white/25 hover:bg-white/[0.08] transition-all focus-ring"
                   >
                     Close
                   </button>

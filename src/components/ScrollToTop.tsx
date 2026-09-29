@@ -24,7 +24,7 @@ export default function ScrollToTop() {
           exit={{ opacity: 0, scale: 0.85, y: 8 }}
           transition={{ type: "spring", stiffness: 300, damping: 22 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-6 right-6 z-50 group flex items-center gap-2 pl-1 pr-4 py-1 rounded-full glass-strong shadow-[0_12px_32px_rgba(15,23,42,0.16)] hover:border-slate-300 transition-colors focus-ring"
+          className="fixed bottom-6 right-6 z-50 group flex items-center gap-2 pl-1 pr-4 py-1 rounded-full glass-strong shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:border-white/15 transition-colors focus-ring"
           aria-label="Scroll to top"
         >
           <span className="relative w-9 h-9 rounded-full bg-foreground text-background grid place-items-center overflow-hidden flex-shrink-0">
