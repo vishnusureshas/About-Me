@@ -38,8 +38,12 @@ jobs:
       - name: Docker build test (backend)
         run: docker build -t my-profile-server:ci -f Dockerfile .
 
+      - name: Create CI stub env for compose validation
+        working-directory: ${{ github.workspace }}
+        run: cp server/.env.example server/.env
+
       - name: Docker Compose validate
-        working-directory: .
+        working-directory: ${{ github.workspace }}
         run: docker compose config --quiet
 
       # Optional: Deploy to Render (add RENDER_DEPLOY_HOOK_URL secret, uncomment)
