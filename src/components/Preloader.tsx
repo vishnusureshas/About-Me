@@ -26,6 +26,10 @@ export default function Preloader() {
   const [visible, setVisible] = useState(true)
   const finished = useRef(false)
 
+  const tipAngle = (progress / 100) * Math.PI * 2 - Math.PI / 2
+  const tipX = 80 + RING * Math.cos(tipAngle)
+  const tipY = 80 + RING * Math.sin(tipAngle)
+
   const finish = useCallback(() => {
     if (finished.current) return
     finished.current = true
@@ -89,8 +93,18 @@ export default function Preloader() {
           </div>
 
           <div className="relative flex flex-col items-center px-6 text-center">
+            {/* boot pill */}
+            <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 backdrop-blur">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,1)]" />
+              <span className="font-jetbrains text-[10px] uppercase tracking-[0.3em] text-muted-foreground">System boot</span>
+            </div>
+
             {/* Quantum core: tick ring + energy ring + progress arc + pulsing core */}
-            <div className="relative h-44 w-44">
+            <div className="relative h-48 w-48">
+              {/* outer ambient glow */}
+              <div className="absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgba(0,212,255,0.16),rgba(123,47,247,0.10)_55%,transparent_70%)] blur-xl" aria-hidden="true" />
+              {/* slow orbiting dashed ring */}
+              <div className="absolute -inset-3 animate-[border-spin_24s_linear_infinite] rounded-full border border-dashed border-white/15" aria-hidden="true" />
               {/* static tick dial */}
               <svg viewBox="0 0 160 160" className="absolute inset-0 h-full w-full -rotate-90" aria-hidden="true">
                 <circle cx="80" cy="80" r="76" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="2" strokeDasharray="2 7" strokeLinecap="round" />
@@ -100,17 +114,18 @@ export default function Preloader() {
                 <div className="absolute inset-[-45%] animate-[border-spin_3.2s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,rgba(0,212,255,0.85)_70deg,transparent_140deg,transparent_200deg,rgba(255,74,149,0.7)_260deg,transparent_320deg)]" />
               </div>
               {/* glass core */}
-              <div className="absolute inset-3 grid place-items-center rounded-full border border-white/10 bg-[#0a0f1e]/95 shadow-[0_0_60px_rgba(0,212,255,0.18),inset_0_0_30px_rgba(123,47,247,0.12)]">
+              <div className="absolute inset-4 flex flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 bg-[#0a0f1e]/95 shadow-[0_0_60px_rgba(0,212,255,0.18),inset_0_0_30px_rgba(123,47,247,0.12)]">
                 <motion.span
                   className="absolute h-16 w-16 rounded-full bg-[radial-gradient(circle_at_35%_35%,rgba(0,212,255,0.9),rgba(123,47,247,0.75)_55%,rgba(255,74,149,0.5))]"
                   animate={{ scale: [1, 1.12, 1], opacity: [0.85, 1, 0.85] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   aria-hidden="true"
                 />
-                <span className="relative font-space text-4xl font-bold tabular-nums text-white drop-shadow-[0_0_18px_rgba(0,212,255,0.45)]">
+                <span className="relative font-space text-5xl font-bold tabular-nums leading-none text-white drop-shadow-[0_0_18px_rgba(0,212,255,0.45)]">
                   {progress}
                 </span>
-                <span className="relative -mt-1 font-jetbrains text-[10px] uppercase tracking-[0.3em] text-cyan-300/80">
+                <span className="relative h-px w-10 bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" aria-hidden="true" />
+                <span className="relative font-jetbrains text-[10px] uppercase tracking-[0.3em] text-cyan-300/80">
                   {progress < 100 ? "Loading" : "Ready"}
                 </span>
               </div>
@@ -136,6 +151,8 @@ export default function Preloader() {
                   strokeDashoffset={CIRC * (1 - progress / 100)}
                   style={{ filter: "drop-shadow(0 0 6px rgba(0,212,255,0.8))", transition: "stroke-dashoffset 0.15s ease-out" }}
                 />
+                <circle cx={tipX} cy={tipY} r="4.5" fill="#22d3ee" style={{ filter: "drop-shadow(0 0 8px rgba(0,212,255,1))" }} />
+                <circle cx={tipX} cy={tipY} r="1.8" fill="#ffffff" />
               </svg>
               {/* orbiting satellites */}
               <motion.span
@@ -156,19 +173,25 @@ export default function Preloader() {
               </motion.span>
             </div>
 
-            {/* status line */}
-            <p className="mt-7 font-jetbrains text-[11px] uppercase tracking-[0.32em] text-muted-foreground" aria-live="polite">
-              {statusFor(progress)}
-              <span className="ml-1 inline-block animate-pulse text-cyan-300">▮</span>
-            </p>
+            {/* status pill */}
+            <div className="mt-8 inline-flex items-center gap-2.5 rounded-full border border-cyan-300/20 bg-cyan-400/[0.06] px-5 py-2" aria-live="polite">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(0,212,255,1)]" />
+              <p className="font-jetbrains text-[11px] uppercase tracking-[0.32em] text-cyan-100/90">
+                {statusFor(progress)}
+              </p>
+            </div>
 
             {/* linear bar + boot checklist */}
             <div className="mt-5 w-64 sm:w-80">
-              <div className="relative h-[6px] overflow-hidden rounded-full border border-white/10 bg-white/[0.06]">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500 shadow-[0_0_16px_rgba(0,212,255,0.7)] transition-[width] duration-150"
-                  style={{ width: `${progress}%` }}
-                />
+              <div className="flex items-center gap-3">
+                <span className="font-jetbrains text-[10px] tabular-nums text-muted-foreground">0</span>
+                <div className="relative h-[6px] flex-1 overflow-hidden rounded-full border border-white/10 bg-white/[0.06]">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500 shadow-[0_0_16px_rgba(0,212,255,0.7)] transition-[width] duration-150"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <span className="font-jetbrains text-[10px] tabular-nums text-muted-foreground">100</span>
               </div>
 
               <ul className="mt-5 space-y-2 text-left">
@@ -201,6 +224,9 @@ export default function Preloader() {
             >
               <FastForward className="h-3.5 w-3.5" /> Skip intro
             </button>
+            <p className="mt-4 font-jetbrains text-[10px] uppercase tracking-[0.28em] text-muted-foreground/50">
+              Build stable
+            </p>
           </div>
         </motion.div>
       )}
