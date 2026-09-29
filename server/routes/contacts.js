@@ -63,9 +63,11 @@ router.post("/contacts", rateLimiter({ windowSeconds: 900, max: 5, keyPrefix: "r
       return res.status(400).json({ error: errors.join("; ") })
     }
 
-    const contact = await Contact.create(sanitized)
-    // Invalidate contacts list cache
-    await invalidateCache("contacts:list")
+    // Save + invalidate concurrently — don't pay sequential round-trips on the submit path
+    const [contact] = await Promise.all([
+      Contact.create(sanitized),
+      invalidateCache("contacts:list"),
+    ])
     // Realtime Gmail notification to owner (fire-and-forget, never blocks response)
     sendContactNotification(sanitized)
     // Touch session (creates session for anonymous user)

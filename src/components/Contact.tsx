@@ -22,6 +22,31 @@ export default function Contact() {
   const [error, setError] = useState("")
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [sentName, setSentName] = useState("")
+  const [slowSend, setSlowSend] = useState(false)
+
+  // Warm up the backend while the visitor reads (free-tier hosts cold-start).
+  // Fire-and-forget: never blocks UI, never surfaces errors.
+  useEffect(() => {
+    const ctrl = new AbortController()
+    const t = window.setTimeout(() => ctrl.abort(), 8000)
+    fetch(`${API_URL}/health`, { signal: ctrl.signal })
+      .catch(() => {})
+      .finally(() => window.clearTimeout(t))
+    return () => {
+      window.clearTimeout(t)
+      ctrl.abort()
+    }
+  }, [])
+
+  // If sending takes >5s (cold server), tell the user what's happening.
+  useEffect(() => {
+    if (status !== "loading") {
+      setSlowSend(false)
+      return
+    }
+    const t = window.setTimeout(() => setSlowSend(true), 5000)
+    return () => window.clearTimeout(t)
+  }, [status])
 
   useEffect(() => {
     if (status !== "error") return
@@ -71,11 +96,15 @@ export default function Contact() {
     }
     setStatus("loading")
     setError("")
+    // Fail fast instead of hanging forever on a cold/unreachable server.
+    const ctrl = new AbortController()
+    const timeout = window.setTimeout(() => ctrl.abort(), 15000)
     try {
       const response = await fetch(`${API_URL}/contacts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: name.trim(), email: email.trim(), subject: subject.trim(), message: message.trim() }),
+        signal: ctrl.signal,
       })
       const data = await response.json().catch(() => ({}))
       if (!response.ok) {
@@ -88,12 +117,18 @@ export default function Contact() {
       setName(""); setEmail(""); setSubject(""); setMessage("")
     } catch (err) {
       setStatus("error")
+      if (err instanceof DOMException && err.name === "AbortError") {
+        setError("Server is taking too long (cold start). Please try again in a few seconds.")
+        return
+      }
       const msg = err instanceof Error ? err.message : "Something went wrong. Please check your connection and try again."
       if (msg === "Failed to fetch" || msg.includes("fetch")) {
         setError("Cannot reach server. Ensure backend is running on " + API_URL)
       } else {
         setError(msg)
       }
+    } finally {
+      window.clearTimeout(timeout)
     }
   }
 
@@ -245,7 +280,7 @@ export default function Contact() {
                 whileTap={status === "loading" ? undefined : { scale: 0.99 }}
                 className="neon-btn shimmer w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-gradient-to-r from-cyan-500 via-violet-600 to-fuchsia-600 text-white font-semibold shadow-[0_12px_40px_rgba(123,47,247,0.35)] transition-all disabled:opacity-60 disabled:cursor-not-allowed focus-ring"
               >
-                {status === "loading" ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending securely...</> : <><Send className="w-4 h-4" /> Send message</>}
+                {status === "loading" ? <><Loader2 className="w-4 h-4 animate-spin" /> {slowSend ? "Waking server, almost there..." : "Sending securely..."}</> : <><Send className="w-4 h-4" /> Send message</>}
               </motion.button>
             </form>
           </motion.div>
